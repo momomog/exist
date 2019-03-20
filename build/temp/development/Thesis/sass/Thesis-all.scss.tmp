@@ -1,5 +1,5 @@
 $app-name:  dynamic( 'Thesis' );
-$image-search-path: 'D:/users/SFokin/IdeaProjects/Thesis/build/development/Thesis/resources';
+$image-search-path: 'C:/Users/Serj/IdeaProjects/exist/build/development/Thesis/resources';
 $theme-name:  dynamic( 'theme-aria' );
 $include-ext-abstractcomponent: dynamic(true);;
 $include-ext-abstractcontainer: dynamic(true);;
@@ -899,6 +899,7 @@ $include-thesis-store-usersstore: dynamic(true);;
 $include-thesis-view-main-main: dynamic(true);;
 $include-thesis-view-main-maincontroller: dynamic(true);;
 $include-thesis-view-main-mainmodel: dynamic(true);;
+$include-thesis-view-users-userwindow: dynamic(true);;
 $include-thesis-view-users-userscontroller: dynamic(true);;
 $include-thesis-view-users-usersgrid: dynamic(true);;
 $output-paths: ("path": "../resources");

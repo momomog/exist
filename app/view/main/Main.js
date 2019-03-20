@@ -16,20 +16,20 @@ Ext.define('Thesis.view.main.Main', {
     titleRotation: 0,
     tabRotation: 0,
 
-    header: {
-        layout: {
-            align: 'stretchmax'
-        }
+    // header: {
+    //     layout: {
+    //         align: 'stretchmax'
+    //     }
+    //
+    // },
 
-    },
-
-    tabBar: {
-        flex: 1,
-        layout: {
-            align: 'stretch',
-            overflowHandler: 'none'
-        }
-    },
+    // tabBar: {
+    //     flex: 1,
+    //     layout: {
+    //         align: 'stretch',
+    //         overflowHandler: 'none'
+    //     }
+    // },
 
     responsiveConfig: {
         wide: {
@@ -48,6 +48,7 @@ Ext.define('Thesis.view.main.Main', {
             }
         }
     },
+
 
     items: [{
         title: 'Пользователь',

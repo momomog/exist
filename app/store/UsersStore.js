@@ -14,9 +14,10 @@ Ext.define('Thesis.store.UsersStore', {
 
     proxy: {
         type: 'memory',
+        autoLoad: true,
         reader: {
             type: 'json',
-            rootProperty: 'items'
+            rootProperty: 'data' //items
         }
     }
 });
