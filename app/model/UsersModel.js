@@ -3,6 +3,10 @@ Ext.define('Thesis.model.UsersModel', {
 
     alias: 'viewmodel.users',
 
+    requires: [
+        'Thesis.store.UsersStore'
+    ],
+
     data: {
         id: null,
         name: null,

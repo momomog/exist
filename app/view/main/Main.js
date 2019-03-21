@@ -45,12 +45,18 @@ Ext.define('Thesis.view.main.Main', {
     }, {
         title: 'Уровень владения',
         items: [{
-            // xtype:
+            xtype: 'skillgrid'
         }]
     }, {
         title: 'Последнее использование',
         items: [{
-            // xtype:
+            xtype: 'usedgrid'
         }]
+    }, {
+        title: 'Знания сотрудников',
+        items: [{
+             xtype: 'personalgrid'
+        }]
+
     }]
 });

@@ -17,7 +17,7 @@ Ext.define('Thesis.store.UsersStore', {
         autoLoad: true,
         reader: {
             type: 'json',
-            rootProperty: 'data' //items
+            rootProperty: 'data'
         }
     }
 });

@@ -11,17 +11,14 @@ Ext.define('Thesis.controller.TechnologyController', {
         myWin.show();
     },
 
-    onAddUser: function () {
+    onAdd: function () {
         var vm = this.getViewModel();
         var store = Ext.getStore('technologyStore');
-        var name = vm.get('name');
         var technology = vm.get('technology');
-        if (!(!name || !technology)) {
+        if (!(!technology)) {
             store.add({
-                name: name,
                 technology: technology
             });
-            vm.set('name', null);
             vm.set('technology', null);
         } else {
             Ext.Msg.alert('Ошибка', 'Все поля должны быть заполнены!');

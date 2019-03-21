@@ -19,19 +19,18 @@ Ext.define('Thesis.view.technology.TechnologyGrid', {
         xtype: 'toolbar',
         items: [{
             xtype: 'button',
-            text: 'Добавить пользователя',
+            text: 'Добавить',
             margin: '0 10 0 0',
             handler: 'onCreateWindow'
         }, {
             xtype: 'button',
-            text: 'Удалить пользователя',
+            text: 'Удалить',
             handler: 'onDeleteUser'
         }]
     }],
 
     columns: [
-        {text: 'Имя', dataIndex: 'name', align: 'left', flex: 1, editor: 'textfield'},
-        {text: 'Знание технологий', dataIndex: 'technology', align: 'left', flex: 2, editor: 'textfield'}
+        {text: 'Наименование технологии', dataIndex: 'technology', align: 'left', flex: 1, editor: 'textfield'}
     ],
 
     plugins: {

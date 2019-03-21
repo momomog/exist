@@ -5,12 +5,18 @@ Ext.define('Thesis.store.TechnologyStore', {
     storeId: 'technologyStore',
 
     fields: [
-        'name', 'technology'
+        'technology'
     ],
 
-    data: [{name: "Иван Иванов", technology: "Spring Framework, Hibernate"},
-        {name: "Петр Петров", technology: "ExtJs, React, Angular"},
-        {name: "Сидор Сидоров", technology: "SQL, MySQL, PostgreSQL, Oracle"}],
+    data: [{technology: "Spring Framework"},
+        {technology: "ExtJs"},
+        {technology: "PostgreSQL"},
+        {technology: "Hibernate"},
+        {technology: "React"},
+        {technology: "MySQL"},
+        {technology: "Swift"},
+        {technology: "Java SE"},
+        {technology: "C#"}],
 
     proxy: {
         type: 'memory',
