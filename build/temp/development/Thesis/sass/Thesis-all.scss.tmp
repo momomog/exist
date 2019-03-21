@@ -1,5 +1,5 @@
 $app-name:  dynamic( 'Thesis' );
-$image-search-path: 'C:/Users/Serj/IdeaProjects/exist/build/development/Thesis/resources';
+$image-search-path: 'D:/users/SFokin/IdeaProjects/Thesis/build/development/Thesis/resources';
 $theme-name:  dynamic( 'theme-aria' );
 $include-ext-abstractcomponent: dynamic(true);;
 $include-ext-abstractcontainer: dynamic(true);;
@@ -895,12 +895,18 @@ $include-ext-window-messagebox: dynamic(true);;
 $include-ext-window-toast: dynamic(true);;
 $include-ext-window-window: dynamic(true);;
 $include-thesis-application: dynamic(true);;
+$include-thesis-controller-maincontroller: dynamic(true);;
+$include-thesis-controller-technologycontroller: dynamic(true);;
+$include-thesis-controller-userscontroller: dynamic(true);;
+$include-thesis-model-mainmodel: dynamic(true);;
+$include-thesis-model-technologymodel: dynamic(true);;
+$include-thesis-model-usersmodel: dynamic(true);;
+$include-thesis-store-technologystore: dynamic(true);;
 $include-thesis-store-usersstore: dynamic(true);;
 $include-thesis-view-main-main: dynamic(true);;
-$include-thesis-view-main-maincontroller: dynamic(true);;
-$include-thesis-view-main-mainmodel: dynamic(true);;
+$include-thesis-view-technology-technologygrid: dynamic(true);;
+$include-thesis-view-technology-technologywindow: dynamic(true);;
 $include-thesis-view-users-userwindow: dynamic(true);;
-$include-thesis-view-users-userscontroller: dynamic(true);;
 $include-thesis-view-users-usersgrid: dynamic(true);;
 $output-paths: ("path": "../resources");
 

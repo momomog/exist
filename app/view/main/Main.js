@@ -1,35 +1,18 @@
 Ext.define('Thesis.view.main.Main', {
     extend: 'Ext.tab.Panel',
-    xtype: 'app-main',
 
     requires: [
-        'Thesis.view.main.MainController',
-        'Thesis.view.main.MainModel',
+        'Thesis.controller.MainController',
+        'Thesis.view.technology.TechnologyGrid',
         'Thesis.view.users.UsersGrid'
     ],
 
     controller: 'main',
-    viewModel: 'main',
-
+    viewmodel: 'main',
 
     tabBarHeaderPosition: 0,
     titleRotation: 0,
     tabRotation: 0,
-
-    // header: {
-    //     layout: {
-    //         align: 'stretchmax'
-    //     }
-    //
-    // },
-
-    // tabBar: {
-    //     flex: 1,
-    //     layout: {
-    //         align: 'stretch',
-    //         overflowHandler: 'none'
-    //     }
-    // },
 
     responsiveConfig: {
         wide: {
@@ -49,7 +32,6 @@ Ext.define('Thesis.view.main.Main', {
         }
     },
 
-
     items: [{
         title: 'Пользователь',
         items: [{
@@ -58,17 +40,17 @@ Ext.define('Thesis.view.main.Main', {
     }, {
         title: 'Технология',
         items: [{
-           // xtype: 'usersgrid'
+            xtype: 'technologygrid'
         }]
     }, {
         title: 'Уровень владения',
         items: [{
-           // xtype: 'usersgrid'
+            // xtype:
         }]
     }, {
         title: 'Последнее использование',
         items: [{
-           // xtype: 'usersgrid'
+            // xtype:
         }]
     }]
 });

@@ -3,14 +3,13 @@ Ext.define('Thesis.view.users.UsersGrid', {
     xtype: 'usersgrid',
 
     controller: 'users',
-    viewModel: 'main',
 
     requires: [
         'Thesis.store.UsersStore',
-        'Thesis.view.users.UsersController'
+        'Thesis.controller.UsersController'
     ],
 
-    title: 'Пользователи',
+    title: 'Пользователь',
 
     store: {
         type: 'users'
@@ -22,17 +21,22 @@ Ext.define('Thesis.view.users.UsersGrid', {
             xtype: 'button',
             text: 'Добавить пользователя',
             margin: '0 10 0 0',
-            handler: 'onAdd'
+            handler: 'onCreateWindow'
         }, {
             xtype: 'button',
             text: 'Удалить пользователя',
-            handler: 'onDelete'
+            handler: 'onDeleteUser'
         }]
     }],
 
     columns: [
-        {text: 'Id', dataIndex: 'id', align: 'left'},
-        {text: 'Имя', dataIndex: 'name', align: 'left', flex: 1},
-        {text: 'Электронный адрес', dataIndex: 'email', align: 'left', flex: 1}
-    ]
+        {text: 'Id', dataIndex: 'id', align: 'left', editor: 'textfield'},
+        {text: 'Имя', dataIndex: 'name', align: 'left', flex: 1, editor: 'textfield'},
+        {text: 'Электронный адрес', dataIndex: 'email', align: 'left', flex: 1.5, editor: 'textfield'}
+    ],
+
+    plugins: {
+        ptype: 'cellediting',
+        clicksToEdit: 2
+    }
 });
