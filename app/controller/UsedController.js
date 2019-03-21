@@ -15,7 +15,15 @@ Ext.define('Thesis.controller.UsedController', {
         var vm = this.getViewModel();
         var store = Ext.getStore('usedStore');
         var used = vm.get('used');
-        if (!(!used)) {
+        var recs = store.getRange();
+
+        for (var i = 0; i < recs.length; i++) {
+            if (recs[i].data.used === used) {
+                Ext.Msg.alert('Ошибка', 'Данный период уже зарегестрирован!');
+                return;
+            }
+        }
+        if (!(!used || used.trim(' ') ===  '')) {
             store.add({
                 used: used
             });

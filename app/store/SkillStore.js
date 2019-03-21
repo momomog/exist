@@ -10,7 +10,7 @@ Ext.define('Thesis.store.SkillStore', {
 
     data: [{skill: "Только в теории"},
         {skill: "Немного на практике"},
-        {skill: "Хорошое знание"}],
+        {skill: "Хорошее знание"}],
 
     proxy: {
         type: 'memory',

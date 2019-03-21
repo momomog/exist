@@ -15,7 +15,15 @@ Ext.define('Thesis.controller.SkillController', {
         var vm = this.getViewModel();
         var store = Ext.getStore('skillStore');
         var skill = vm.get('skill');
-        if (!(!skill)) {
+        var recs = store.getRange();
+
+        for (var i = 0; i < recs.length; i++) {
+            if (recs[i].data.skill === skill) {
+                Ext.Msg.alert('Ошибка', 'Данный навык уже зарегестрирован!');
+                return;
+            }
+        }
+        if (!(!skill || skill.trim(' ') ===  '')) {
             store.add({
                 skill: skill
             });

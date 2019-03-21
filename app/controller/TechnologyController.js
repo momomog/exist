@@ -15,7 +15,15 @@ Ext.define('Thesis.controller.TechnologyController', {
         var vm = this.getViewModel();
         var store = Ext.getStore('technologyStore');
         var technology = vm.get('technology');
-        if (!(!technology)) {
+        var recs = store.getRange();
+
+        for (var i = 0; i < recs.length; i++) {
+            if (recs[i].data.technology === technology) {
+                Ext.Msg.alert('Ошибка', 'Данная технология уже зарегестрирована!');
+                return;
+            }
+        }
+        if (!(!technology || technology.trim(' ') ===  '')) {
             store.add({
                 technology: technology
             });
