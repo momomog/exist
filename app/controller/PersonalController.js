@@ -21,18 +21,14 @@ Ext.define('Thesis.controller.PersonalController', {
         var used = this.lookupReference('usedCombo').getValue();
         var commentary = vm.get('commentary');
 
-            store.add({
-                name: name,
-                technology: tech,
-                skill: skill,
-                used: used,
-                commentary: commentary
-            });
-            vm.set('commentary', null);
-
-            // Ext.Msg.alert('Ошибка', 'Все поля должны быть заполнены!');
-        store.sync();
-store.refresh();
+        store.add({
+            name: name,
+            technology: tech,
+            skill: skill,
+            used: used,
+            commentary: commentary
+        });
+        vm.set('commentary', null);
     },
 
     onDeleteUser: function () {

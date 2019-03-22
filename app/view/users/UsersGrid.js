@@ -20,7 +20,7 @@ Ext.define('Thesis.view.users.UsersGrid', {
         items: [{
             xtype: 'button',
             text: 'Добавить пользователя',
-            margin: '0 10 0 0',
+            margin: '0 5 0 0',
             handler: 'onCreateWindow'
         }, {
             xtype: 'button',

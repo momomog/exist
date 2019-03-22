@@ -8,8 +8,14 @@ Ext.define('Thesis.store.PersonalStore', {
         'name', 'technology', 'skill', 'used', 'commentary'
     ],
 
-    data: [{name: "Иван Иванов", technology: "Spring", skill: "Только в теории", used: "Не более месяца назад", commentary:" "}
-        ],
+    data: [{
+        name: "Иван Иванов",
+        technology: "Spring Framework",
+        skill: "Только в теории",
+        used: "Не более месяца назад",
+        commentary: "Вникаю в основы"
+    }
+    ],
 
     proxy: {
         type: 'memory',

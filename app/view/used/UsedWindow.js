@@ -9,7 +9,7 @@ Ext.define('Thesis.view.used.UsedWindow', {
     title: 'Добавить интервал',
     defaultType: 'textfield',
 
-    items: [ {
+    items: [{
         allowBlank: false,
         fieldLabel: 'Наименование',
         emptyText: 'интервал',

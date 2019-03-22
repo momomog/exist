@@ -20,7 +20,7 @@ Ext.define('Thesis.view.personal.PersonalGrid', {
         items: [{
             xtype: 'button',
             text: 'Добавить сотрудника',
-            margin: '0 10 0 0',
+            margin: '0 5 0 0',
             handler: 'onCreateWindow'
         }, {
             xtype: 'button',
@@ -30,10 +30,10 @@ Ext.define('Thesis.view.personal.PersonalGrid', {
     }],
 
     columns: [
-        {text: 'Имя', dataIndex: 'name', align: 'left', flex: 1, editor: 'textfield'},
-        {text: 'Технология', dataIndex: 'technology', align: 'left', flex: 1, editor: 'textfield'},
-        {text: 'Уровень владения', dataIndex: 'skill', align: 'left', flex: 1, editor: 'textfield'},
-        {text: 'Последнее использование', dataIndex: 'used', align: 'left', flex: 1, editor: 'textfield'},
+        {text: 'Имя', dataIndex: 'name', align: 'left', flex: 1},
+        {text: 'Технология', dataIndex: 'technology', align: 'left', flex: 1},
+        {text: 'Уровень владения', dataIndex: 'skill', align: 'left', flex: 1},
+        {text: 'Последнее использование', dataIndex: 'used', align: 'left', flex: 1},
         {text: 'Комментарий', dataIndex: 'commentary', align: 'left', flex: 1, editor: 'textfield'}
     ],
 

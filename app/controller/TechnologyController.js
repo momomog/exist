@@ -23,7 +23,7 @@ Ext.define('Thesis.controller.TechnologyController', {
                 return;
             }
         }
-        if (!(!technology || technology.trim(' ') ===  '')) {
+        if (!(!technology || technology.trim(' ') === '')) {
             store.add({
                 technology: technology
             });

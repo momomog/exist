@@ -9,7 +9,7 @@ Ext.define('Thesis.view.technology.TechnologyWindow', {
     title: 'Добавить технологию',
     defaultType: 'textfield',
 
-    items: [ {
+    items: [{
         allowBlank: false,
         fieldLabel: 'Наименование',
         emptyText: 'технология',

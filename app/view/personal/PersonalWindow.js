@@ -22,6 +22,7 @@ Ext.define('Thesis.view.personal.PersonalWindow', {
         store: 'usersStore',
         displayField: 'name',
         valueField: 'name',
+        editable: false,
         queryMode: 'local',
         reference: 'nameCombo',
         margin: 10
@@ -31,6 +32,7 @@ Ext.define('Thesis.view.personal.PersonalWindow', {
         store: 'technologyStore',
         displayField: 'technology',
         valueField: 'technology',
+        editable: false,
         queryMode: 'local',
         reference: 'technologyCombo',
         margin: 10
@@ -40,6 +42,7 @@ Ext.define('Thesis.view.personal.PersonalWindow', {
         store: 'skillStore',
         displayField: 'skill',
         valueField: 'skill',
+        editable: false,
         queryMode: 'local',
         reference: 'skillCombo',
         margin: 10
@@ -49,6 +52,7 @@ Ext.define('Thesis.view.personal.PersonalWindow', {
         store: 'usedStore',
         displayField: 'used',
         valueField: 'used',
+        editable: false,
         queryMode: 'local',
         reference: 'usedCombo',
         margin: 10

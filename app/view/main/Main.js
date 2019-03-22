@@ -13,22 +13,11 @@ Ext.define('Thesis.view.main.Main', {
     tabBarHeaderPosition: 0,
     titleRotation: 0,
     tabRotation: 0,
+    bodyPadding: '0 0 0 10',
 
     responsiveConfig: {
         wide: {
             headerPosition: 'left'
-        }
-    },
-
-    defaults: {
-        bodyPadding: '0 0 0 20',
-        tabConfig: {
-            plugins: 'responsive',
-            responsiveConfig: {
-                wide: {
-                    textAlign: 'left'
-                }
-            }
         }
     },
 
@@ -55,7 +44,7 @@ Ext.define('Thesis.view.main.Main', {
     }, {
         title: 'Знания сотрудников',
         items: [{
-             xtype: 'personalgrid'
+            xtype: 'personalgrid'
         }]
 
     }]

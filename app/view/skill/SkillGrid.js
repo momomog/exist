@@ -20,7 +20,7 @@ Ext.define('Thesis.view.skill.SkillGrid', {
         items: [{
             xtype: 'button',
             text: 'Добавить',
-            margin: '0 10 0 0',
+            margin: '0 5 0 0',
             handler: 'onCreateWindow'
         }, {
             xtype: 'button',

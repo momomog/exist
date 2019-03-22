@@ -23,7 +23,7 @@ Ext.define('Thesis.controller.UsedController', {
                 return;
             }
         }
-        if (!(!used || used.trim(' ') ===  '')) {
+        if (!(!used || used.trim(' ') === '')) {
             store.add({
                 used: used
             });

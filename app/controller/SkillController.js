@@ -23,7 +23,7 @@ Ext.define('Thesis.controller.SkillController', {
                 return;
             }
         }
-        if (!(!skill || skill.trim(' ') ===  '')) {
+        if (!(!skill || skill.trim(' ') === '')) {
             store.add({
                 skill: skill
             });

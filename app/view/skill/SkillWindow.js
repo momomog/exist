@@ -9,7 +9,7 @@ Ext.define('Thesis.view.skill.SkillWindow', {
     title: 'Добавить уровень владения',
     defaultType: 'textfield',
 
-    items: [ {
+    items: [{
         allowBlank: false,
         fieldLabel: 'Наименование',
         emptyText: 'уровень',
