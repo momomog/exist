@@ -20,13 +20,26 @@ Ext.define('Thesis.controller.PersonalController', {
         var skill = this.lookupReference('skillCombo').getValue();
         var used = this.lookupReference('usedCombo').getValue();
         var commentary = vm.get('commentary');
+        var recs = store.getRange();
+
+        if (!name || !tech || !skill || !used) {
+            Ext.Msg.alert('Ошибка', 'Все поля должны быть выбраны!');
+            return;
+        }
+
+        for (var i = 0; i < recs.length; i++) {
+            if (recs[i].data.Имя === name && recs[i].data.technology === tech) {
+                Ext.Msg.alert('Ошибка', name + ': данная технология уже зарегестрирована!');
+                return;
+            }
+        }
 
         store.add({
-            name: name,
             technology: tech,
             skill: skill,
             used: used,
-            commentary: commentary
+            commentary: commentary,
+            Имя: name
         });
         vm.set('commentary', null);
     },

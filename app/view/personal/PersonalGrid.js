@@ -5,8 +5,10 @@ Ext.define('Thesis.view.personal.PersonalGrid', {
     controller: 'personal',
 
     requires: [
-        'Thesis.store.PersonalStore',
-        'Thesis.controller.PersonalController'
+        'Ext.grid.feature.Grouping',
+        'Ext.grid.plugin.CellEditing',
+        'Thesis.controller.PersonalController',
+        'Thesis.store.PersonalStore'
     ],
 
     title: 'Сотрудники',
@@ -30,12 +32,13 @@ Ext.define('Thesis.view.personal.PersonalGrid', {
     }],
 
     columns: [
-        {text: 'Имя', dataIndex: 'name', align: 'left', flex: 1},
         {text: 'Технология', dataIndex: 'technology', align: 'left', flex: 1},
         {text: 'Уровень владения', dataIndex: 'skill', align: 'left', flex: 1},
         {text: 'Последнее использование', dataIndex: 'used', align: 'left', flex: 1},
         {text: 'Комментарий', dataIndex: 'commentary', align: 'left', flex: 1, editor: 'textfield'}
     ],
+
+    features: [{ftype: 'grouping'}],
 
     plugins: {
         ptype: 'cellediting',
