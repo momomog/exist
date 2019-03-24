@@ -13,7 +13,7 @@ Ext.define('Thesis.store.PersonalStore', {
         technology: "Spring Framework",
         skill: "Только в теории",
         used: "Не более месяца назад",
-        commentary: "Вникаю в основы",
+        commentary: "Изучаю основы",
         Имя: 'Иван Иванов'
     }, {
         name: "",

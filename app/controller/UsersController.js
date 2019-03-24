@@ -17,7 +17,12 @@ Ext.define('Thesis.controller.UsersController', {
         var name = vm.get('name');
         var email = vm.get('email');
         var recs = store.getRange();
-        var id = recs[recs.length - 1].id;
+
+        if (recs.length === 0) {
+           var id = 0;
+        } else {
+            id = recs[recs.length - 1].id;
+        }
 
         if (!(!name || !email || name.trim(' ').length === 0 || email.trim(' ').length === 0)) {
             store.add({

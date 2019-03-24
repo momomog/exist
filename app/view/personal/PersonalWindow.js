@@ -58,7 +58,7 @@ Ext.define('Thesis.view.personal.PersonalWindow', {
         margin: 10
     }, {
         fieldLabel: 'Комментарий',
-        emptyText: 'не обязательно',
+        emptyText: ' не обязательно',
         margin: 10,
         bind: '{commentary}'
     }],
