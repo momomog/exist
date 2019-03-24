@@ -4,19 +4,12 @@ Ext.define('Thesis.view.users.UserWindow', {
     controller: 'users',
     viewModel: 'users',
 
-    height: 180,
+    height: 140,
     width: 300,
     title: 'Новый пользователь',
     defaultType: 'textfield',
 
     items: [{
-        xtype: 'numberfield',
-        allowBlank: false,
-        fieldLabel: 'User ID',
-        emptyText: 'id',
-        margin: 10,
-        bind: '{id}'
-    }, {
         allowBlank: false,
         fieldLabel: 'Name',
         emptyText: 'name',

@@ -14,25 +14,17 @@ Ext.define('Thesis.controller.UsersController', {
     onAddUser: function () {
         var vm = this.getViewModel();
         var store = Ext.getStore('usersStore');
-        var id = vm.get('id');
         var name = vm.get('name');
         var email = vm.get('email');
         var recs = store.getRange();
+        var id = recs[recs.length - 1].id;
 
-        for (var i = 0; i < recs.length; i++) {
-            if (Number(recs[i].id) === id) {
-                Ext.Msg.alert('Ошибка', 'Пользователь с данным ID уже зарегестрирован!');
-                return;
-            }
-        }
-
-        if (!(!id || !name || !email || name.trim(' ').length === 0 || email.trim(' ').length === 0)) {
+        if (!(!name || !email || name.trim(' ').length === 0 || email.trim(' ').length === 0)) {
             store.add({
-                id: id,
+                id: ++id,
                 name: name,
                 email: email
             });
-            vm.set('id', null);
             vm.set('name', null);
             vm.set('email', null);
         } else {

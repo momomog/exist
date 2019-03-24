@@ -4,7 +4,6 @@ Ext.define('Thesis.model.UsersModel', {
     alias: 'viewmodel.users',
 
     data: {
-        id: null,
         name: null,
         email: null
     }
