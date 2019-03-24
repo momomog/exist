@@ -32,9 +32,9 @@ Ext.define('Thesis.view.personal.PersonalGrid', {
     }],
 
     columns: [
-        {text: 'Технология', dataIndex: 'technology', align: 'left', flex: 1},
-        {text: 'Уровень владения', dataIndex: 'skill', align: 'left', flex: 1},
-        {text: 'Последнее использование', dataIndex: 'used', align: 'left', flex: 1},
+        {text: 'Технология', dataIndex: 'technology', align: 'left', flex: 1, editor: 'textfield'},
+        {text: 'Уровень владения', dataIndex: 'skill', align: 'left', flex: 1, editor: 'textfield'},
+        {text: 'Последнее использование', dataIndex: 'used', align: 'left', flex: 1, editor: 'textfield'},
         {text: 'Комментарий', dataIndex: 'commentary', align: 'left', flex: 1, editor: 'textfield'}
     ],
 

@@ -11,9 +11,9 @@ Ext.define('Thesis.view.personal.PersonalWindow', {
     controller: 'personal',
     viewModel: 'personal',
 
-    height: 250,
+    height: 255,
     width: 300,
-    title: 'Новый сотрудник',
+    title: 'Добавить нового сотрудника',
     defaultType: 'textfield',
 
     items: [{
@@ -58,7 +58,7 @@ Ext.define('Thesis.view.personal.PersonalWindow', {
         margin: 10
     }, {
         fieldLabel: 'Комментарий',
-        emptyText: '(не обязательно)',
+        emptyText: 'не обязательно',
         margin: 10,
         bind: '{commentary}'
     }],

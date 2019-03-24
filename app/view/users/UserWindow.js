@@ -6,18 +6,18 @@ Ext.define('Thesis.view.users.UserWindow', {
 
     height: 140,
     width: 300,
-    title: 'Новый пользователь',
+    title: 'Добавить нового пользователя',
     defaultType: 'textfield',
 
     items: [{
         allowBlank: false,
-        fieldLabel: 'Name',
+        fieldLabel: 'Имя',
         emptyText: 'name',
         margin: 10,
         bind: '{name}'
     }, {
         allowBlank: false,
-        fieldLabel: 'Email',
+        fieldLabel: 'Эл. адрес',
         emptyText: 'email',
         margin: 10,
         bind: '{email}'
