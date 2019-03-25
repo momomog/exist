@@ -47,7 +47,7 @@ Ext.define('Thesis.controller.PersonalController', {
             url: 'http://localhost:8080/first',
             method: 'POST',
             params: {
-                data: Ext.encode("1qwerttq","2qfewf","3fwerg")
+                data: Ext.encode({"fname": "Mike", "lname": "Miller", "email": "mike@gmail.com"})
             },
             scope: this,
             success: this.onSuccess,
