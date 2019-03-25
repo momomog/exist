@@ -12,37 +12,63 @@ Ext.define('Thesis.controller.PersonalController', {
     },
 
     onAddUser: function () {
-        var vm = this.getViewModel();
-        var store = Ext.getStore('personalStore');
 
-        var name = this.lookupReference('nameCombo').getValue();
-        var tech = this.lookupReference('technologyCombo').getValue();
-        var skill = this.lookupReference('skillCombo').getValue();
-        var used = this.lookupReference('usedCombo').getValue();
-        var commentary = vm.get('commentary');
-        var recs = store.getRange();
+        // var vm = this.getViewModel();
+        // var store = Ext.getStore('personalStore');
+        //
+        // var name = this.lookupReference('nameCombo').getValue();
+        // var tech = this.lookupReference('technologyCombo').getValue();
+        // var skill = this.lookupReference('skillCombo').getValue();
+        // var used = this.lookupReference('usedCombo').getValue();
+        // var commentary = vm.get('commentary');
+        // var recs = store.getRange();
+        //
+        // if (!name || !tech || !skill || !used) {
+        //     Ext.Msg.alert('Ошибка', 'Все поля должны быть выбраны!');
+        //     return;
+        // }
+        // for (var i = 0; i < recs.length; i++) {
+        //     if (recs[i].data.Name === name && recs[i].data.technology === tech) {
+        //         Ext.Msg.alert('Ошибка', name + ': данная технология уже зарегестрирована!');
+        //         return;
+        //     }
+        // }
+        //
+        // store.add({
+        //     technology: tech,
+        //     skill: skill,
+        //     used: used,
+        //     commentary: commentary,
+        //     Name: name
+        // });
+        // vm.set('commentary', null);
 
-        if (!name || !tech || !skill || !used) {
-            Ext.Msg.alert('Ошибка', 'Все поля должны быть выбраны!');
-            return;
-        }
-
-        for (var i = 0; i < recs.length; i++) {
-            if (recs[i].data.Имя === name && recs[i].data.technology === tech) {
-                Ext.Msg.alert('Ошибка', name + ': данная технология уже зарегестрирована!');
-                return;
-            }
-        }
-
-        store.add({
-            technology: tech,
-            skill: skill,
-            used: used,
-            commentary: commentary,
-            Имя: name
+        Ext.Ajax.request({
+            url: 'http://localhost:8080/first',
+            method: 'POST',
+            params: {
+                data: Ext.encode("1qwerttq","2qfewf","3fwerg")
+            },
+            scope: this,
+            success: this.onSuccess,
+            failure: this.onFailure
         });
-        vm.set('commentary', null);
     },
+
+    onFailure: function (err) {
+        Ext.MessageBox.alert('Error occured during registration', 'Please try again!');
+    },
+
+    onSuccess: function (response) {
+//Received response from the server
+        response = Ext.decode(response.responseText);
+        if (response.success) {
+            Ext.MessageBox.alert('Successful Registration', response.message);
+        } else {
+            Ext.MessageBox.alert('Registration failed', response.message);
+        }
+    },
+
 
     onDeleteUser: function () {
         var store = Ext.getStore('personalStore');

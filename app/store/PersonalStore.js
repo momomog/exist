@@ -1,12 +1,12 @@
 Ext.define('Thesis.store.PersonalStore', {
     extend: 'Ext.data.Store',
+    model: 'Thesis.model.ModelForPersonalStore',
 
     alias: 'store.personal',
     storeId: 'personalStore',
-    groupField: 'Имя',
-    fields: [
-        'name', 'technology', 'skill', 'used', 'commentary'
-    ],
+    groupField: 'Name',
+    autoLoad: true,
+    autoSync: true,
 
     data: [{
         name: "",
@@ -14,30 +14,40 @@ Ext.define('Thesis.store.PersonalStore', {
         skill: "Только в теории",
         used: "Не более месяца назад",
         commentary: "Изучаю основы",
-        Имя: 'Иван Иванов'
+        Name: 'Иван Иванов'
     }, {
         name: "",
         technology: "Swift",
         skill: "Немного на практике",
         used: "3 месяца назад",
         commentary: "",
-        Имя: 'Петр Петров'
+        Name: 'Петр Петров'
     }, {
         name: "",
         technology: "Swift",
         skill: "Немного на практике",
         used: "1 месяц назад",
         commentary: "",
-        Имя: 'Иван Иванов'
+        Name: 'Иван Иванов'
     }
     ],
 
     proxy: {
-        type: 'memory',
+        type: 'rest',
         autoLoad: true,
+        url : 'http://localhost:8080/first',
+        // api: {
+        //     create: 'technology',
+        //     read: 'technology',
+        //     destroy: 'technology'
+        // },
         reader: {
             type: 'json',
             rootProperty: 'data'
+        },
+        writer: {
+            type: 'json',
+            writeAllFields: true
         }
     }
 });
