@@ -35,12 +35,7 @@ Ext.define('Thesis.store.PersonalStore', {
     proxy: {
         type: 'rest',
         autoLoad: true,
-        url : 'http://localhost:8080/first',
-        // api: {
-        //     create: 'technology',
-        //     read: 'technology',
-        //     destroy: 'technology'
-        // },
+        url: 'http://localhost:8080/first',
         reader: {
             type: 'json',
             rootProperty: 'data'
