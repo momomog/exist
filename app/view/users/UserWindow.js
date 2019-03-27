@@ -3,7 +3,6 @@ Ext.define('Thesis.view.users.UserWindow', {
 
     controller: 'users',
     viewModel: 'users',
-
     height: 140,
     width: 300,
     title: 'Добавить нового пользователя',

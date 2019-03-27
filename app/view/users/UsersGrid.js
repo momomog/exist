@@ -10,6 +10,7 @@ Ext.define('Thesis.view.users.UsersGrid', {
     ],
 
     title: 'Пользователь',
+    itemId: 'theGrid',
 
     store: {
         type: 'users'
@@ -26,6 +27,10 @@ Ext.define('Thesis.view.users.UsersGrid', {
             xtype: 'button',
             text: 'Удалить пользователя',
             handler: 'onDeleteUser'
+        }, {
+            xtype: 'button',
+            text: 'Обновить данные',
+            handler: 'onUpdate'
         }]
     }],
 
@@ -38,5 +43,9 @@ Ext.define('Thesis.view.users.UsersGrid', {
     plugins: {
         ptype: 'cellediting',
         clicksToEdit: 2
+    },
+
+    listeners: {
+        afterrender: 'onUpdate'
     }
 });

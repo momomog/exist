@@ -3,21 +3,19 @@ Ext.define('Thesis.store.UsersStore', {
 
     alias: 'store.users',
     storeId: 'usersStore',
-
-    fields: [
-        'id', 'name', 'email'
-    ],
-
-    data: [{id: "1", name: "Иван Иванов", email: "ivanov@gmail.com"},
-        {id: "2", name: "Петр Петров", email: "petrov@gmail.com"},
-        {id: "3", name: "Сидор Сидоров", email: "sidorov@gmail.com"}],
+    model: 'Thesis.model.ForUsersModel',
 
     proxy: {
-        type: 'memory',
+        type: 'ajax',
         autoLoad: true,
+        url: 'http://localhost:8080/first',
         reader: {
             type: 'json',
-            rootProperty: 'data'
+            rootProperty: 'users'
+        },
+        writer: {
+            type: 'json',
+            writeAllFields: true
         }
     }
 });

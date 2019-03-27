@@ -11,24 +11,62 @@ Ext.define('Thesis.controller.UsersController', {
         myWin.show();
     },
 
+    onUpdate: function () {
+        Ext.Ajax.request({
+            url: 'http://localhost:8080/first',
+            method: 'POST',
+            params: {
+                data: Ext.encode({"dataBase": "users", "operation": "usersUpdate"})
+            },
+            success: function (response) {
+                response = Ext.decode(response.responseText);
+                var store = Ext.getStore('usersStore');
+                store.removeAll();
+                if (response.success) {
+                    for (var i = 0; i < response.users.length; i++) {
+                        store.add({
+                            id: response.users[i].id,
+                            name: response.users[i].name,
+                            email: response.users[i].email
+                        });
+                    }
+                } else {
+                    Ext.MessageBox.alert('Ошибка добавления', response.message);
+                }
+            },
+
+            failure: function (err) {
+                Ext.MessageBox.alert('Ошибка!!', err);
+            }
+        });
+
+    },
+
     onAddUser: function () {
         var vm = this.getViewModel();
         var store = Ext.getStore('usersStore');
         var name = vm.get('name');
         var email = vm.get('email');
-        var recs = store.getRange();
-
-        if (recs.length === 0) {
-           var id = 0;
-        } else {
-            id = recs[recs.length - 1].id;
-        }
 
         if (!(!name || !email || name.trim(' ').length === 0 || email.trim(' ').length === 0)) {
-            store.add({
-                id: ++id,
-                name: name,
-                email: email
+            Ext.Ajax.request({
+                url: 'http://localhost:8080/first',
+                method: 'POST',
+                params: {
+                    data: Ext.encode({"dataBase": "users", "operation": "addNewUser", "name": name, "email": email})
+                },
+                scope: this,
+                success: function (response) {
+                    response = Ext.decode(response.responseText);
+                    if (response.success) {
+                        this.onUpdate();
+                    } else {
+                        Ext.MessageBox.alert('Ошибка добавления', response.message);
+                    }
+                },
+                failure: function (err) {
+                    Ext.MessageBox.alert('Ошибка!!', err);
+                }
             });
             vm.set('name', null);
             vm.set('email', null);
@@ -37,9 +75,31 @@ Ext.define('Thesis.controller.UsersController', {
         }
     },
 
-    onDeleteUser: function () {
+
+    onDeleteUser: function (record) {
         var store = Ext.getStore('usersStore');
-        var selection = this.getView().getSelectionModel().getSelection();
-        store.remove(selection);
+        var grid = Ext.ComponentQuery.query('#theGrid')[0];
+        var id = grid.getSelectionModel().lastSelected.id;
+
+
+        Ext.Ajax.request({
+            url: 'http://localhost:8080/first',
+            method: 'POST',
+            params: {
+                data: Ext.encode({"dataBase": "users", "operation": "deleteUser", "id": id})
+            },
+            scope: this,
+            success: function (response) {
+                response = Ext.decode(response.responseText);
+                if (response.success) {
+                    this.onUpdate();
+                } else {
+                    Ext.MessageBox.alert('Ошибка удаления', response.message);
+                }
+            },
+            failure: function (err) {
+                Ext.MessageBox.alert('Ошибка!!', err);
+            }
+        });
     }
 });
