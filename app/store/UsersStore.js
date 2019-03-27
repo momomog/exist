@@ -3,7 +3,7 @@ Ext.define('Thesis.store.UsersStore', {
 
     alias: 'store.users',
     storeId: 'usersStore',
-    model: 'Thesis.model.ForUsersModel',
+    model: 'Thesis.model.Users',
 
     proxy: {
         type: 'ajax',

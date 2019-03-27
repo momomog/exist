@@ -1,5 +1,5 @@
 $app-name:  dynamic( 'Thesis' );
-$image-search-path: 'D:/users/SFokin/IdeaProjects/Thesis/build/development/Thesis/resources';
+$image-search-path: 'C:/Users/Serj/IdeaProjects/exist/build/development/Thesis/resources';
 $theme-name:  dynamic( 'theme-gray' );
 $include-ext-abstractcomponent: dynamic(true);;
 $include-ext-abstractcontainer: dynamic(true);;
@@ -893,14 +893,8 @@ $include-thesis-controller-skillcontroller: dynamic(true);;
 $include-thesis-controller-technologycontroller: dynamic(true);;
 $include-thesis-controller-usedcontroller: dynamic(true);;
 $include-thesis-controller-userscontroller: dynamic(true);;
-$include-thesis-model-forusersmodel: dynamic(true);;
-$include-thesis-model-mainmodel: dynamic(true);;
-$include-thesis-model-modelforpersonalstore: dynamic(true);;
-$include-thesis-model-personalmodel: dynamic(true);;
-$include-thesis-model-skillmodel: dynamic(true);;
-$include-thesis-model-technologymodel: dynamic(true);;
-$include-thesis-model-usedmodel: dynamic(true);;
-$include-thesis-model-usersmodel: dynamic(true);;
+$include-thesis-model-personal: dynamic(true);;
+$include-thesis-model-users: dynamic(true);;
 $include-thesis-store-personalstore: dynamic(true);;
 $include-thesis-store-skillstore: dynamic(true);;
 $include-thesis-store-technologystore: dynamic(true);;
@@ -917,6 +911,12 @@ $include-thesis-view-used-usedgrid: dynamic(true);;
 $include-thesis-view-used-usedwindow: dynamic(true);;
 $include-thesis-view-users-userwindow: dynamic(true);;
 $include-thesis-view-users-usersgrid: dynamic(true);;
+$include-thesis-viewmodel-mainmodel: dynamic(true);;
+$include-thesis-viewmodel-personalmodel: dynamic(true);;
+$include-thesis-viewmodel-skillmodel: dynamic(true);;
+$include-thesis-viewmodel-technologymodel: dynamic(true);;
+$include-thesis-viewmodel-usedmodel: dynamic(true);;
+$include-thesis-viewmodel-usersmodel: dynamic(true);;
 $output-paths: ("path": "../resources");
 
 /* ======================== ETC ======================== */

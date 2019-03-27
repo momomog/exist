@@ -1,4 +1,4 @@
-Ext.define('Thesis.model.ModelForPersonalStore', {
+Ext.define('Thesis.model.Personal', {
     extend: 'Ext.data.Model',
 
     fields: [

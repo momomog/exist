@@ -1,4 +1,4 @@
-Ext.define('Thesis.model.SkillModel', {
+Ext.define('Thesis.viewmodel.SkillModel', {
     extend: 'Ext.app.ViewModel',
 
     alias: 'viewmodel.skill',

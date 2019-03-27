@@ -1,4 +1,4 @@
-Ext.define('Thesis.model.PersonalModel', {
+Ext.define('Thesis.viewmodel.PersonalModel', {
     extend: 'Ext.app.ViewModel',
 
     alias: 'viewmodel.personal',

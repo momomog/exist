@@ -1,6 +1,6 @@
 Ext.define('Thesis.store.PersonalStore', {
     extend: 'Ext.data.Store',
-    model: 'Thesis.model.ModelForPersonalStore',
+    model: 'Thesis.model.Personal',
 
     alias: 'store.personal',
     storeId: 'personalStore',

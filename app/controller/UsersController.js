@@ -22,13 +22,17 @@ Ext.define('Thesis.controller.UsersController', {
                 response = Ext.decode(response.responseText);
                 var store = Ext.getStore('usersStore');
                 store.removeAll();
-                if (response.success) {
-                    for (var i = 0; i < response.users.length; i++) {
-                        store.add({
-                            id: response.users[i].id,
-                            name: response.users[i].name,
-                            email: response.users[i].email
-                        });
+                out: if (response.success) {
+                    if (response.users === undefined) {
+                        break out;
+                    } else {
+                        for (var i = 0; i < response.users.length; i++) {
+                            store.add({
+                                id: response.users[i].id,
+                                name: response.users[i].name,
+                                email: response.users[i].email
+                            });
+                        }
                     }
                 } else {
                     Ext.MessageBox.alert('Ошибка добавления', response.message);
@@ -36,7 +40,7 @@ Ext.define('Thesis.controller.UsersController', {
             },
 
             failure: function (err) {
-                Ext.MessageBox.alert('Ошибка!!', err);
+                Ext.MessageBox.alert('Ошибка!', err);
             }
         });
 
@@ -76,11 +80,10 @@ Ext.define('Thesis.controller.UsersController', {
     },
 
 
-    onDeleteUser: function (record) {
+    onDeleteUser: function () {
         var store = Ext.getStore('usersStore');
         var grid = Ext.ComponentQuery.query('#theGrid')[0];
         var id = grid.getSelectionModel().lastSelected.id;
-
 
         Ext.Ajax.request({
             url: 'http://localhost:8080/first',
@@ -94,11 +97,11 @@ Ext.define('Thesis.controller.UsersController', {
                 if (response.success) {
                     this.onUpdate();
                 } else {
-                    Ext.MessageBox.alert('Ошибка удаления', response.message);
+                    Ext.MessageBox.alert('Ошибка при удалении', response.message);
                 }
             },
             failure: function (err) {
-                Ext.MessageBox.alert('Ошибка!!', err);
+                Ext.MessageBox.alert('Ошибка!', err);
             }
         });
     }
