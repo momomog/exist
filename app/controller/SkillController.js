@@ -99,5 +99,35 @@ Ext.define('Thesis.controller.SkillController', {
                 Ext.MessageBox.alert('Ошибка!', err);
             }
         });
+    },
+
+    onSkillEdit: function (roweditor, event) {
+        var newName = event.newValues.name;
+        var id = event.newValues.id;
+
+        Ext.Ajax.request({
+            url: 'http://localhost:8080/first',
+            method: 'POST',
+            params: {
+                data: Ext.encode({
+                    "dataBase": "skills",
+                    "operation": "updateSkill",
+                    "name": newName,
+                    "id": id
+                })
+            },
+            scope: this,
+            success: function (response) {
+                response = Ext.decode(response.responseText);
+                if (response.success) {
+                    this.onSkillsUpdate();
+                } else {
+                    Ext.MessageBox.alert('Ошибка при редактировании', response.message);
+                }
+            },
+            failure: function (err) {
+                Ext.MessageBox.alert('Ошибка!', err);
+            }
+        });
     }
 });

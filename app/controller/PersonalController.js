@@ -16,7 +16,9 @@ Ext.define('Thesis.controller.PersonalController', {
             url: 'http://localhost:8080/first',
             method: 'POST',
             params: {
-                data: Ext.encode({"dataBase": "personals", "operation": "personalsUpdate"})
+                data: Ext.encode({
+                    "dataBase": "personals",
+                    "operation": "personalsUpdate"})
             },
             success: function (response) {
                 response = Ext.decode(response.responseText);
@@ -101,7 +103,10 @@ Ext.define('Thesis.controller.PersonalController', {
             url: 'http://localhost:8080/first',
             method: 'POST',
             params: {
-                data: Ext.encode({"dataBase": "personals", "operation": "deletePersonal", "id": id})
+                data: Ext.encode({
+                    "dataBase": "personals",
+                    "operation": "deletePersonal",
+                    "id": id})
             },
             scope: this,
             success: function (response) {
@@ -110,6 +115,43 @@ Ext.define('Thesis.controller.PersonalController', {
                     this.onPersonalsUpdate();
                 } else {
                     Ext.MessageBox.alert('Ошибка при удалении', response.message);
+                }
+            },
+            failure: function (err) {
+                Ext.MessageBox.alert('Ошибка!', err);
+            }
+        });
+    },
+
+    onPersonalEdit: function (roweditor, event) {
+        // var newName = event.newValues.name;
+        var newTechnology = event.newValues.technology;
+        var newSkill = event.newValues.skill;
+        var newUsed = event.newValues.used;
+        var newCommentary = event.newValues.commentary;
+        var id = event.newValues.id;
+
+        Ext.Ajax.request({
+            url: 'http://localhost:8080/first',
+            method: 'POST',
+            params: {
+                data: Ext.encode({
+                    "dataBase": "personals",
+                    "operation": "updatePersonal",
+                    "id": id,
+                    "technology": newTechnology,
+                    "skill": newSkill,
+                    "used": newUsed,
+                    "commentary": newCommentary
+                })
+            },
+            scope: this,
+            success: function (response) {
+                response = Ext.decode(response.responseText);
+                if (response.success) {
+                    this.onPersonalsUpdate();
+                } else {
+                    Ext.MessageBox.alert('Ошибка при редактировании', response.message);
                 }
             },
             failure: function (err) {
