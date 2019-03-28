@@ -30,8 +30,8 @@ Ext.define('Thesis.view.personal.PersonalWindow', {
         xtype: 'combobox',
         fieldLabel: 'Технология',
         store: 'technologyStore',
-        displayField: 'technology',
-        valueField: 'technology',
+        displayField: 'name',
+        valueField: 'name',
         editable: false,
         queryMode: 'local',
         reference: 'technologyCombo',
@@ -40,8 +40,8 @@ Ext.define('Thesis.view.personal.PersonalWindow', {
         xtype: 'combobox',
         fieldLabel: 'Уровень владения',
         store: 'skillStore',
-        displayField: 'skill',
-        valueField: 'skill',
+        displayField: 'name',
+        valueField: 'name',
         editable: false,
         queryMode: 'local',
         reference: 'skillCombo',
@@ -50,8 +50,8 @@ Ext.define('Thesis.view.personal.PersonalWindow', {
         xtype: 'combobox',
         fieldLabel: 'Последнее использование',
         store: 'usedStore',
-        displayField: 'used',
-        valueField: 'used',
+        displayField: 'name',
+        valueField: 'name',
         editable: false,
         queryMode: 'local',
         reference: 'usedCombo',
@@ -66,6 +66,6 @@ Ext.define('Thesis.view.personal.PersonalWindow', {
     buttons: [
         {
             text: 'OK',
-            handler: 'onAddUser'
+            handler: 'onAddPersonal'
         }]
 });

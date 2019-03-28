@@ -4,6 +4,6 @@ Ext.define('Thesis.viewmodel.UsedModel', {
     alias: 'viewmodel.used',
 
     data: {
-        used: null
+        name: null
     }
 });

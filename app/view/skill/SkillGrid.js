@@ -3,7 +3,7 @@ Ext.define('Thesis.view.skill.SkillGrid', {
     xtype: 'skillgrid',
 
     controller: 'skill',
-
+    itemId: 'skillGrid',
     requires: [
         'Ext.grid.plugin.CellEditing',
         'Thesis.controller.SkillController'
@@ -25,16 +25,24 @@ Ext.define('Thesis.view.skill.SkillGrid', {
         }, {
             xtype: 'button',
             text: 'Удалить',
-            handler: 'onDeleteUser'
+            handler: 'onDeleteSkill'
+        }, {
+            xtype: 'button',
+            text: 'Обновить данные',
+            handler: 'onSkillsUpdate'
         }]
     }],
 
     columns: [
-        {text: 'Уровень навыков', dataIndex: 'skill', align: 'left', flex: 1, editor: 'textfield'}
+        {text: 'Уровень навыков', dataIndex: 'name', align: 'left', flex: 1, editor: 'textfield'}
     ],
 
     plugins: {
         ptype: 'cellediting',
         clicksToEdit: 2
+    },
+
+    listeners: {
+        afterrender: 'onSkillsUpdate'
     }
 });

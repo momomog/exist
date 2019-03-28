@@ -11,7 +11,7 @@ Ext.define('Thesis.controller.UsersController', {
         myWin.show();
     },
 
-    onUpdate: function () {
+    onUsersUpdate: function () {
         Ext.Ajax.request({
             url: 'http://localhost:8080/first',
             method: 'POST',
@@ -43,7 +43,6 @@ Ext.define('Thesis.controller.UsersController', {
                 Ext.MessageBox.alert('Ошибка!', err);
             }
         });
-
     },
 
     onAddUser: function () {
@@ -63,7 +62,7 @@ Ext.define('Thesis.controller.UsersController', {
                 success: function (response) {
                     response = Ext.decode(response.responseText);
                     if (response.success) {
-                        this.onUpdate();
+                        this.onUsersUpdate();
                     } else {
                         Ext.MessageBox.alert('Ошибка добавления', response.message);
                     }
@@ -74,6 +73,7 @@ Ext.define('Thesis.controller.UsersController', {
             });
             vm.set('name', null);
             vm.set('email', null);
+            this.view.hide();
         } else {
             Ext.Msg.alert('Ошибка', 'Все поля должны быть заполнены!');
         }
@@ -82,7 +82,7 @@ Ext.define('Thesis.controller.UsersController', {
 
     onDeleteUser: function () {
         var store = Ext.getStore('usersStore');
-        var grid = Ext.ComponentQuery.query('#theGrid')[0];
+        var grid = Ext.ComponentQuery.query('#usersGrid')[0];
         var id = grid.getSelectionModel().lastSelected.id;
 
         Ext.Ajax.request({
@@ -95,7 +95,7 @@ Ext.define('Thesis.controller.UsersController', {
             success: function (response) {
                 response = Ext.decode(response.responseText);
                 if (response.success) {
-                    this.onUpdate();
+                    this.onUsersUpdate();
                 } else {
                     Ext.MessageBox.alert('Ошибка при удалении', response.message);
                 }

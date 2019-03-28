@@ -1,12 +1,14 @@
 Ext.define('Thesis.view.users.UserWindow', {
     extend: 'Ext.window.Window',
 
+
     controller: 'users',
     viewModel: 'users',
     height: 140,
     width: 300,
     title: 'Добавить нового пользователя',
     defaultType: 'textfield',
+    itemId: 'win',
 
     items: [{
         allowBlank: false,

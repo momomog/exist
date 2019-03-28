@@ -14,12 +14,12 @@ Ext.define('Thesis.view.used.UsedWindow', {
         fieldLabel: 'Наименование',
         emptyText: 'интервал',
         margin: 10,
-        bind: '{used}'
+        bind: '{name}'
     }],
 
     buttons: [
         {
             text: 'OK',
-            handler: 'onAdd'
+            handler: 'onAddUsed'
         }]
 });

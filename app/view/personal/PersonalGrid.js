@@ -12,7 +12,7 @@ Ext.define('Thesis.view.personal.PersonalGrid', {
     ],
 
     title: 'Сотрудники',
-
+    itemId: 'personalGrid',
     store: {
         type: 'personal'
     },
@@ -27,7 +27,11 @@ Ext.define('Thesis.view.personal.PersonalGrid', {
         }, {
             xtype: 'button',
             text: 'Удалить сотрудника',
-            handler: 'onDeleteUser'
+            handler: 'onDeletePersonal'
+        }, {
+            xtype: 'button',
+            text: 'Обновить данные',
+            handler: 'onPersonalsUpdate'
         }]
     }],
 
@@ -43,5 +47,9 @@ Ext.define('Thesis.view.personal.PersonalGrid', {
     plugins: {
         ptype: 'cellediting',
         clicksToEdit: 2
+    },
+
+    listeners: {
+        afterrender: 'onPersonalsUpdate'
     }
 });

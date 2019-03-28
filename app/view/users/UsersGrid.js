@@ -3,6 +3,7 @@ Ext.define('Thesis.view.users.UsersGrid', {
     xtype: 'usersgrid',
 
     controller: 'users',
+    viewModel: 'users',
 
     requires: [
         'Thesis.store.UsersStore',
@@ -10,7 +11,7 @@ Ext.define('Thesis.view.users.UsersGrid', {
     ],
 
     title: 'Пользователь',
-    itemId: 'theGrid',
+    itemId: 'usersGrid',
 
     store: {
         type: 'users'
@@ -30,7 +31,7 @@ Ext.define('Thesis.view.users.UsersGrid', {
         }, {
             xtype: 'button',
             text: 'Обновить данные',
-            handler: 'onUpdate'
+            handler: 'onUsersUpdate'
         }]
     }],
 
@@ -46,6 +47,6 @@ Ext.define('Thesis.view.users.UsersGrid', {
     },
 
     listeners: {
-        afterrender: 'onUpdate'
+        afterrender: 'onUsersUpdate'
     }
 });

@@ -11,31 +11,95 @@ Ext.define('Thesis.controller.TechnologyController', {
         myWin.show();
     },
 
-    onAdd: function () {
+    onTechnologiesUpdate: function () {
+        Ext.Ajax.request({
+            url: 'http://localhost:8080/first',
+            method: 'POST',
+            params: {
+                data: Ext.encode({"dataBase": "technologies", "operation": "technologiesUpdate"})
+            },
+            success: function (response) {
+                response = Ext.decode(response.responseText);
+                var store = Ext.getStore('technologyStore');
+                store.removeAll();
+                out: if (response.success) {
+                    if (response.technologies === undefined) {
+                        break out;
+                    } else {
+                        for (var i = 0; i < response.technologies.length; i++) {
+                            store.add({
+                                id: response.technologies[i].id,
+                                name: response.technologies[i].name
+                            });
+                        }
+                    }
+                } else {
+                    Ext.MessageBox.alert('Ошибка добавления', response.message);
+                }
+            },
+
+            failure: function (err) {
+                Ext.MessageBox.alert('Ошибка!', err);
+            }
+        });
+
+    },
+
+    onAddTechnology: function () {
         var vm = this.getViewModel();
         var store = Ext.getStore('technologyStore');
-        var technology = vm.get('technology');
-        var recs = store.getRange();
+        var technology = vm.get('name');
 
-        for (var i = 0; i < recs.length; i++) {
-            if (recs[i].data.technology === technology) {
-                Ext.Msg.alert('Ошибка', 'Данная технология уже зарегестрирована!');
-                return;
-            }
-        }
         if (!(!technology || technology.trim(' ') === '')) {
-            store.add({
-                technology: technology
+            Ext.Ajax.request({
+                url: 'http://localhost:8080/first',
+                method: 'POST',
+                params: {
+                    data: Ext.encode({"dataBase": "technologies", "operation": "addTechnologyToDB", "name": technology})
+                },
+                scope: this,
+                success: function (response) {
+                    response = Ext.decode(response.responseText);
+                    if (response.success) {
+                        this.onTechnologiesUpdate();
+                    } else {
+                        Ext.MessageBox.alert('Ошибка добавления', response.message);
+                    }
+                },
+                failure: function (err) {
+                    Ext.MessageBox.alert('Ошибка!!', err);
+                }
             });
-            vm.set('technology', null);
+            vm.set('name', null);
+            this.view.hide();
         } else {
             Ext.Msg.alert('Ошибка', 'Все поля должны быть заполнены!');
         }
     },
 
-    onDeleteUser: function () {
+    onDeleteTechnology: function () {
         var store = Ext.getStore('technologyStore');
-        var selection = this.getView().getSelectionModel().getSelection();
-        store.remove(selection);
+        var grid = Ext.ComponentQuery.query('#technologyGrid')[0];
+        var id = grid.getSelectionModel().lastSelected.id;
+
+        Ext.Ajax.request({
+            url: 'http://localhost:8080/first',
+            method: 'POST',
+            params: {
+                data: Ext.encode({"dataBase": "technologies", "operation": "deleteTechnologyFromDB", "id": id})
+            },
+            scope: this,
+            success: function (response) {
+                response = Ext.decode(response.responseText);
+                if (response.success) {
+                    this.onTechnologiesUpdate();
+                } else {
+                    Ext.MessageBox.alert('Ошибка при удалении', response.message);
+                }
+            },
+            failure: function (err) {
+                Ext.MessageBox.alert('Ошибка!', err);
+            }
+        });
     }
 });

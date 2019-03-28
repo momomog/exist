@@ -3,25 +3,20 @@ Ext.define('Thesis.store.UsedStore', {
 
     alias: 'store.used',
     storeId: 'usedStore',
+    model: 'Thesis.model.Used',
 
-    fields: [
-        'used'
-    ],
-
-    data: [{used: "Постоянно"},
-        {used: "Не более месяца назад"},
-        {used: "1 месяц назад"},
-        {used: "3 месяца назад"},
-        {used: "6 месяцев назад"},
-        {used: "1 год назад"},
-        {used: "Больше 1 года назад"}],
 
     proxy: {
-        type: 'memory',
+        type: 'ajax',
         autoLoad: true,
+        url: 'http://localhost:8080/first',
         reader: {
             type: 'json',
-            rootProperty: 'data'
+            rootProperty: 'useds'
+        },
+        writer: {
+            type: 'json',
+            writeAllFields: true
         }
     }
 });

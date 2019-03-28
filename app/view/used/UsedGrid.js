@@ -3,7 +3,7 @@ Ext.define('Thesis.view.used.UsedGrid', {
     xtype: 'usedgrid',
 
     controller: 'used',
-
+    itemId: 'usedGrid',
     requires: [
         'Ext.grid.plugin.CellEditing',
         'Thesis.controller.UsedController'
@@ -25,16 +25,24 @@ Ext.define('Thesis.view.used.UsedGrid', {
         }, {
             xtype: 'button',
             text: 'Удалить',
-            handler: 'onDeleteUser'
+            handler: 'onDeleteUsed'
+        }, {
+            xtype: 'button',
+            text: 'Обновить данные',
+            handler: 'onUsedsUpdate'
         }]
     }],
 
     columns: [
-        {text: 'Время последнего использования', dataIndex: 'used', align: 'left', flex: 1, editor: 'textfield'}
+        {text: 'Время последнего использования', dataIndex: 'name', align: 'left', flex: 1, editor: 'textfield'}
     ],
 
     plugins: {
         ptype: 'cellediting',
         clicksToEdit: 2
+    },
+
+    listeners: {
+        afterrender: 'onUsedsUpdate'
     }
 });

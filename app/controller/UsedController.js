@@ -11,31 +11,92 @@ Ext.define('Thesis.controller.UsedController', {
         myWin.show();
     },
 
-    onAdd: function () {
+    onUsedsUpdate: function () {
+        Ext.Ajax.request({
+            url: 'http://localhost:8080/first',
+            method: 'POST',
+            params: {
+                data: Ext.encode({"dataBase": "useds", "operation": "usedsUpdate"})
+            },
+            success: function (response) {
+                response = Ext.decode(response.responseText);
+                var store = Ext.getStore('usedStore');
+                store.removeAll();
+                out: if (response.success) {
+                    if (response.useds === undefined) {
+                        break out;
+                    } else {
+                        for (var i = 0; i < response.useds.length; i++) {
+                            store.add({
+                                id: response.useds[i].id,
+                                name: response.useds[i].name
+                            });
+                        }
+                    }
+                } else {
+                    Ext.MessageBox.alert('Ошибка добавления', response.message);
+                }
+            },
+            failure: function (err) {
+                Ext.MessageBox.alert('Ошибка!', err);
+            }
+        });
+    },
+
+    onAddUsed: function () {
         var vm = this.getViewModel();
         var store = Ext.getStore('usedStore');
-        var used = vm.get('used');
-        var recs = store.getRange();
+        var used = vm.get('name');
 
-        for (var i = 0; i < recs.length; i++) {
-            if (recs[i].data.used === used) {
-                Ext.Msg.alert('Ошибка', 'Данный период уже зарегестрирован!');
-                return;
-            }
-        }
         if (!(!used || used.trim(' ') === '')) {
-            store.add({
-                used: used
+            Ext.Ajax.request({
+                url: 'http://localhost:8080/first',
+                method: 'POST',
+                params: {
+                    data: Ext.encode({"dataBase": "useds", "operation": "addUsedToDB", "name": used})
+                },
+                scope: this,
+                success: function (response) {
+                    response = Ext.decode(response.responseText);
+                    if (response.success) {
+                        this.onUsedsUpdate();
+                    } else {
+                        Ext.MessageBox.alert('Ошибка добавления', response.message);
+                    }
+                },
+                failure: function (err) {
+                    Ext.MessageBox.alert('Ошибка!!', err);
+                }
             });
-            vm.set('used', null);
+            vm.set('name', null);
+            this.view.hide();
         } else {
             Ext.Msg.alert('Ошибка', 'Все поля должны быть заполнены!');
         }
     },
 
-    onDeleteUser: function () {
-        var store = Ext.getStore('usedStore');
-        var selection = this.getView().getSelectionModel().getSelection();
-        store.remove(selection);
+    onDeleteUsed: function () {
+        var grid = Ext.ComponentQuery.query('#usedGrid')[0];
+        var id = grid.getSelectionModel().lastSelected.id;
+
+        Ext.Ajax.request({
+            url: 'http://localhost:8080/first',
+            method: 'POST',
+            params: {
+                data: Ext.encode({"dataBase": "useds", "operation": "deleteUsedFromDB", "id": id})
+            },
+            scope: this,
+            success: function (response) {
+                response = Ext.decode(response.responseText);
+                if (response.success) {
+                    this.onUsedsUpdate();
+                } else {
+                    Ext.MessageBox.alert('Ошибка при удалении', response.message);
+                }
+            },
+            failure: function (err) {
+                Ext.MessageBox.alert('Ошибка!', err);
+            }
+        });
     }
 });

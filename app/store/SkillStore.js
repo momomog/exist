@@ -3,21 +3,19 @@ Ext.define('Thesis.store.SkillStore', {
 
     alias: 'store.skill',
     storeId: 'skillStore',
-
-    fields: [
-        'skill'
-    ],
-
-    data: [{skill: "Только в теории"},
-        {skill: "Немного на практике"},
-        {skill: "Хорошее знание"}],
+    model: 'Thesis.model.Skill',
 
     proxy: {
-        type: 'memory',
+        type: 'ajax',
         autoLoad: true,
+        url: 'http://localhost:8080/first',
         reader: {
             type: 'json',
-            rootProperty: 'data'
+            rootProperty: 'skills'
+        },
+        writer: {
+            type: 'json',
+            writeAllFields: true
         }
     }
 });

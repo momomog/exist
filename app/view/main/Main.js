@@ -1,6 +1,12 @@
 Ext.define('Thesis.view.main.Main', {
     extend: 'Ext.tab.Panel',
 
+    mixins: {
+        skill: 'Thesis.controller.SkillController',
+        tech: 'Thesis.controller.TechnologyController',
+        lastUsed: 'Thesis.controller.UsedController'
+    },
+
     requires: [
         'Thesis.controller.MainController',
         'Thesis.view.technology.TechnologyGrid',
@@ -47,5 +53,13 @@ Ext.define('Thesis.view.main.Main', {
             xtype: 'personalgrid'
         }]
 
-    }]
+    }],
+
+    listeners: {
+        afterrender: function(){
+            this.onSkillsUpdate();
+            this.onTechnologiesUpdate();
+            this.onUsedsUpdate();
+        }
+    }
 });

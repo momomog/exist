@@ -2,20 +2,19 @@ Ext.define('Thesis.model.Personal', {
     extend: 'Ext.data.Model',
 
     fields: [
-        'technology', 'skill', 'used', 'commentary'
+       'id', 'technology', 'skill', 'used', 'commentary'
     ],
 
+    autoLoad: true,
     proxy: {
-        type: 'rest',
+        type: 'ajax',
         reader: {
             type: 'json',
-            root: 'data',
-            successProperty: 'success'
+            successProperty: 'personals'
         },
         writer: {
             type: 'json',
             writeAllFields: true
         }
-
     }
 });

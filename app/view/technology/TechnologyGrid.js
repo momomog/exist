@@ -3,6 +3,7 @@ Ext.define('Thesis.view.technology.TechnologyGrid', {
     xtype: 'technologygrid',
 
     controller: 'technology',
+    itemId: 'technologyGrid',
 
     requires: [
         'Ext.grid.plugin.CellEditing',
@@ -25,16 +26,24 @@ Ext.define('Thesis.view.technology.TechnologyGrid', {
         }, {
             xtype: 'button',
             text: 'Удалить',
-            handler: 'onDeleteUser'
+            handler: 'onDeleteTechnology'
+        }, {
+            xtype: 'button',
+            text: 'Обновить данные',
+            handler: 'onTechnologiesUpdate'
         }]
     }],
 
     columns: [
-        {text: 'Наименование технологии', dataIndex: 'technology', align: 'left', flex: 1, editor: 'textfield'}
+        {text: 'Наименование технологии', dataIndex: 'name', align: 'left', flex: 1, editor: 'textfield'}
     ],
 
     plugins: {
         ptype: 'cellediting',
         clicksToEdit: 2
+    },
+
+    listeners: {
+        afterrender: 'onTechnologiesUpdate'
     }
 });

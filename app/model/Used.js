@@ -1,8 +1,8 @@
-Ext.define('Thesis.model.Users', {
+Ext.define('Thesis.model.Used', {
     extend: 'Ext.data.Model',
 
     fields: [
-        'id', 'name', 'email'
+        'id', 'name'
     ],
 
     autoLoad: true,
@@ -10,11 +10,12 @@ Ext.define('Thesis.model.Users', {
         type: 'ajax',
         reader: {
             type: 'json',
-            successProperty: 'users'
+            successProperty: 'useds'
         },
         writer: {
             type: 'json',
             writeAllFields: true
         }
+
     }
 });

@@ -3,27 +3,19 @@ Ext.define('Thesis.store.TechnologyStore', {
 
     alias: 'store.technology',
     storeId: 'technologyStore',
-
-    fields: [
-        'technology'
-    ],
-
-    data: [{technology: "Spring Framework"},
-        {technology: "ExtJs"},
-        {technology: "PostgreSQL"},
-        {technology: "Hibernate"},
-        {technology: "React"},
-        {technology: "MySQL"},
-        {technology: "Swift"},
-        {technology: "Java SE"},
-        {technology: "C#"}],
+    model: 'Thesis.model.Technology',
 
     proxy: {
-        type: 'memory',
+        type: 'ajax',
         autoLoad: true,
+        url: 'http://localhost:8080/first',
         reader: {
             type: 'json',
-            rootProperty: 'data'
+            rootProperty: 'technologies'
+        },
+        writer: {
+            type: 'json',
+            writeAllFields: true
         }
     }
 });

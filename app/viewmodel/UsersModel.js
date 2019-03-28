@@ -2,6 +2,7 @@ Ext.define('Thesis.viewmodel.UsersModel', {
     extend: 'Ext.app.ViewModel',
 
     alias: 'viewmodel.users',
+    controller: 'users',
 
     data: {
         name: null,

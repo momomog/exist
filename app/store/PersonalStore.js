@@ -8,37 +8,13 @@ Ext.define('Thesis.store.PersonalStore', {
     autoLoad: true,
     autoSync: true,
 
-    data: [{
-        name: "",
-        technology: "Spring Framework",
-        skill: "Только в теории",
-        used: "Не более месяца назад",
-        commentary: "Изучаю основы",
-        Name: 'Иван Иванов'
-    }, {
-        name: "",
-        technology: "Swift",
-        skill: "Немного на практике",
-        used: "3 месяца назад",
-        commentary: "",
-        Name: 'Петр Петров'
-    }, {
-        name: "",
-        technology: "Swift",
-        skill: "Немного на практике",
-        used: "1 месяц назад",
-        commentary: "",
-        Name: 'Иван Иванов'
-    }
-    ],
-
     proxy: {
-        type: 'rest',
+        type: 'ajax',
         autoLoad: true,
         url: 'http://localhost:8080/first',
         reader: {
             type: 'json',
-            rootProperty: 'data'
+            rootProperty: 'personals'
         },
         writer: {
             type: 'json',

@@ -4,6 +4,6 @@ Ext.define('Thesis.viewmodel.SkillModel', {
     alias: 'viewmodel.skill',
 
     data: {
-        skill: null
+        name: null
     }
 });

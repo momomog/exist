@@ -14,12 +14,12 @@ Ext.define('Thesis.view.skill.SkillWindow', {
         fieldLabel: 'Наименование',
         emptyText: 'уровень',
         margin: 10,
-        bind: '{skill}'
+        bind: '{name}'
     }],
 
     buttons: [
         {
             text: 'OK',
-            handler: 'onAdd'
+            handler: 'onAddSkill'
         }]
 });

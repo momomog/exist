@@ -14,12 +14,12 @@ Ext.define('Thesis.view.technology.TechnologyWindow', {
         fieldLabel: 'Наименование',
         emptyText: 'технология',
         margin: 10,
-        bind: '{technology}'
+        bind: '{name}'
     }],
 
     buttons: [
         {
             text: 'OK',
-            handler: 'onAdd'
+            handler: 'onAddTechnology'
         }]
 });

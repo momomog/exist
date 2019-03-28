@@ -4,7 +4,6 @@ Ext.define('Thesis.viewmodel.TechnologyModel', {
     alias: 'viewmodel.technology',
 
     data: {
-        name: null,
-        technology: null
+        name: null
     }
 });
