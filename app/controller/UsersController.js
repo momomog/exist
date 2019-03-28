@@ -104,5 +104,34 @@ Ext.define('Thesis.controller.UsersController', {
                 Ext.MessageBox.alert('Ошибка!', err);
             }
         });
+    },
+
+    onUserEdit: function (roweditor, event) {
+        var newName = event.newValues.name;
+        var newEmail = event.newValues.email;
+        var id = event.newValues.id;
+
+        Ext.Ajax.request({
+            url: 'http://localhost:8080/first',
+            method: 'POST',
+            params: {
+                data: Ext.encode({"dataBase": "users", "operation": "updateUser", "name": newName, "email": newEmail, "id": id})
+            },
+            scope: this,
+            success: function (response) {
+                response = Ext.decode(response.responseText);
+                if (response.success) {
+                    this.onUsersUpdate();
+                } else {
+                    Ext.MessageBox.alert('Ошибка при удалении', response.message);
+                }
+            },
+            failure: function (err) {
+                Ext.MessageBox.alert('Ошибка!', err);
+            }
+        });
+
+
     }
+
 });

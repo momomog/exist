@@ -38,11 +38,12 @@ Ext.define('Thesis.view.skill.SkillGrid', {
     ],
 
     plugins: {
-        ptype: 'cellediting',
+        ptype: 'rowediting',
         clicksToEdit: 2
     },
 
     listeners: {
-        afterrender: 'onSkillsUpdate'
+        afterrender: 'onSkillsUpdate',
+        edit: 'onSkillEdit'
     }
 });

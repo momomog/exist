@@ -45,11 +45,12 @@ Ext.define('Thesis.view.personal.PersonalGrid', {
     features: [{ftype: 'grouping'}],
 
     plugins: {
-        ptype: 'cellediting',
+        ptype: 'rowediting',
         clicksToEdit: 2
     },
 
     listeners: {
-        afterrender: 'onPersonalsUpdate'
+        afterrender: 'onPersonalsUpdate',
+        edit: 'onPersonalEdit'
     }
 });

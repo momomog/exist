@@ -39,11 +39,12 @@ Ext.define('Thesis.view.technology.TechnologyGrid', {
     ],
 
     plugins: {
-        ptype: 'cellediting',
+        ptype: 'rowediting',
         clicksToEdit: 2
     },
 
     listeners: {
-        afterrender: 'onTechnologiesUpdate'
+        afterrender: 'onTechnologiesUpdate',
+        edit: 'onTechnologyEdit'
     }
 });

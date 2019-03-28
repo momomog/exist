@@ -36,17 +36,18 @@ Ext.define('Thesis.view.users.UsersGrid', {
     }],
 
     columns: [
-        {text: 'Id', dataIndex: 'id', align: 'left', editor: 'textfield'},
+        {text: 'Id', dataIndex: 'id', align: 'left'},
         {text: 'Имя', dataIndex: 'name', align: 'left', flex: 1, editor: 'textfield'},
         {text: 'Электронный адрес', dataIndex: 'email', align: 'left', flex: 1.5, editor: 'textfield'}
     ],
 
     plugins: {
-        ptype: 'cellediting',
+        ptype: 'rowediting',
         clicksToEdit: 2
     },
 
     listeners: {
-        afterrender: 'onUsersUpdate'
+        afterrender: 'onUsersUpdate',
+        edit: 'onUserEdit'
     }
 });

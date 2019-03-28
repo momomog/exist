@@ -38,11 +38,12 @@ Ext.define('Thesis.view.used.UsedGrid', {
     ],
 
     plugins: {
-        ptype: 'cellediting',
+        ptype: 'rowediting',
         clicksToEdit: 2
     },
 
     listeners: {
-        afterrender: 'onUsedsUpdate'
+        afterrender: 'onUsedsUpdate',
+        edit: 'onUsedEdit'
     }
 });
