@@ -129,7 +129,7 @@ Ext.define('Thesis.controller.PersonalController', {
         var newSkill = event.newValues.skill;
         var newUsed = event.newValues.used;
         var newCommentary = event.newValues.commentary;
-        var id = event.newValues.id;
+        var id = event.record.id;
 
         Ext.Ajax.request({
             url: 'http://localhost:8080/first',

@@ -114,9 +114,10 @@ Ext.define('Thesis.controller.TechnologyController', {
         });
     },
 
-    onTechnologyEdit: function (roweditor, event) {
+    onTechnologyEdit: function (roweditor, event, record) {
+
         var newName = event.newValues.name;
-        var id = event.newValues.id;
+        var id = event.record.id;
 
         Ext.Ajax.request({
             url: 'http://localhost:8080/first',

@@ -16,7 +16,9 @@ Ext.define('Thesis.controller.UsersController', {
             url: 'http://localhost:8080/first',
             method: 'POST',
             params: {
-                data: Ext.encode({"dataBase": "users", "operation": "usersUpdate"})
+                data: Ext.encode({
+                    "dataBase": "users",
+                    "operation": "usersUpdate"})
             },
             success: function (response) {
                 response = Ext.decode(response.responseText);
@@ -38,7 +40,6 @@ Ext.define('Thesis.controller.UsersController', {
                     Ext.MessageBox.alert('Ошибка добавления', response.message);
                 }
             },
-
             failure: function (err) {
                 Ext.MessageBox.alert('Ошибка!', err);
             }

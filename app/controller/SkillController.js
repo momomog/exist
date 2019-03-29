@@ -103,7 +103,7 @@ Ext.define('Thesis.controller.SkillController', {
 
     onSkillEdit: function (roweditor, event) {
         var newName = event.newValues.name;
-        var id = event.newValues.id;
+        var id = event.record.id;
 
         Ext.Ajax.request({
             url: 'http://localhost:8080/first',
