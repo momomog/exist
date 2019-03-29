@@ -16,7 +16,9 @@ Ext.define('Thesis.controller.SkillController', {
             url: 'http://localhost:8080/first',
             method: 'POST',
             params: {
-                data: Ext.encode({"dataBase": "skills", "operation": "skillsUpdate"})
+                data: Ext.encode({
+                    "dataBase": "skills",
+                    "operation": "skillsUpdate"})
             },
             success: function (response) {
                 response = Ext.decode(response.responseText);
@@ -54,7 +56,10 @@ Ext.define('Thesis.controller.SkillController', {
                 url: 'http://localhost:8080/first',
                 method: 'POST',
                 params: {
-                    data: Ext.encode({"dataBase": "skills", "operation": "addSkillToDB", "name": skill})
+                    data: Ext.encode({
+                        "dataBase": "skills",
+                        "operation": "addSkillToDB",
+                        "name": skill})
                 },
                 scope: this,
                 success: function (response) {
@@ -84,7 +89,10 @@ Ext.define('Thesis.controller.SkillController', {
             url: 'http://localhost:8080/first',
             method: 'POST',
             params: {
-                data: Ext.encode({"dataBase": "skills", "operation": "deleteSkillFromDB", "id": id})
+                data: Ext.encode({
+                    "dataBase": "skills",
+                    "operation": "deleteSkillFromDB",
+                    "id": id})
             },
             scope: this,
             success: function (response) {

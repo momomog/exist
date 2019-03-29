@@ -16,7 +16,9 @@ Ext.define('Thesis.controller.UsedController', {
             url: 'http://localhost:8080/first',
             method: 'POST',
             params: {
-                data: Ext.encode({"dataBase": "useds", "operation": "usedsUpdate"})
+                data: Ext.encode({
+                    "dataBase": "useds",
+                    "operation": "usedsUpdate"})
             },
             success: function (response) {
                 response = Ext.decode(response.responseText);
@@ -53,7 +55,10 @@ Ext.define('Thesis.controller.UsedController', {
                 url: 'http://localhost:8080/first',
                 method: 'POST',
                 params: {
-                    data: Ext.encode({"dataBase": "useds", "operation": "addUsedToDB", "name": used})
+                    data: Ext.encode({
+                        "dataBase": "useds",
+                        "operation": "addUsedToDB",
+                        "name": used})
                 },
                 scope: this,
                 success: function (response) {
@@ -83,7 +88,10 @@ Ext.define('Thesis.controller.UsedController', {
             url: 'http://localhost:8080/first',
             method: 'POST',
             params: {
-                data: Ext.encode({"dataBase": "useds", "operation": "deleteUsedFromDB", "id": id})
+                data: Ext.encode({
+                    "dataBase": "useds",
+                    "operation": "deleteUsedFromDB",
+                    "id": id})
             },
             scope: this,
             success: function (response) {
