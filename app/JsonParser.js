@@ -1,5 +1,0 @@
-
-Ext.define('Thesis.JsonParser', {
-
-
-});

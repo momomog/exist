@@ -3,7 +3,8 @@ Ext.define('Thesis.controller.UsedController', {
     alias: 'controller.used',
 
     requires: [
-        'Thesis.view.used.UsedWindow'
+        'Thesis.view.used.UsedWindow',
+        'Thesis.store.UsedStore'
     ],
 
     onCreateWindow: function () {
