@@ -54,6 +54,7 @@ Ext.define('Thesis.controller.PersonalController', {
         var store = Ext.getStore('personalStore');
 
         var name = this.lookupReference('nameCombo').getValue();
+        console.log(name);
         var tech = this.lookupReference('technologyCombo').getValue();
         var skill = this.lookupReference('skillCombo').getValue();
         var used = this.lookupReference('usedCombo').getValue();
@@ -98,6 +99,7 @@ Ext.define('Thesis.controller.PersonalController', {
         var store = Ext.getStore('personalStore');
         var grid = Ext.ComponentQuery.query('#personalGrid')[0];
         var id = grid.getSelectionModel().lastSelected.id;
+        console.log(grid.getSelectionModel().lastSelected);
 
         Ext.Ajax.request({
             url: 'http://localhost:8080/first',
@@ -124,7 +126,7 @@ Ext.define('Thesis.controller.PersonalController', {
     },
 
     onPersonalEdit: function (roweditor, event) {
-        // var newName = event.newValues.name;
+        console.log(event);
         var newTechnology = event.newValues.technology;
         var newSkill = event.newValues.skill;
         var newUsed = event.newValues.used;

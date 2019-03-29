@@ -69,6 +69,7 @@ Ext.define('Thesis.controller.TechnologyController', {
                     response = Ext.decode(response.responseText);
                     if (response.success) {
                         this.onTechnologiesUpdate();
+                        this.view.hide();
                     } else {
                         Ext.MessageBox.alert('Ошибка добавления', response.message);
                     }
@@ -78,7 +79,6 @@ Ext.define('Thesis.controller.TechnologyController', {
                 }
             });
             vm.set('name', null);
-            this.view.hide();
         } else {
             Ext.Msg.alert('Ошибка', 'Все поля должны быть заполнены!');
         }

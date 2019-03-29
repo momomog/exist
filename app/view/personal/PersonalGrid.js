@@ -8,7 +8,8 @@ Ext.define('Thesis.view.personal.PersonalGrid', {
         'Ext.grid.feature.Grouping',
         'Ext.grid.plugin.CellEditing',
         'Thesis.controller.PersonalController',
-        'Thesis.store.PersonalStore'
+        'Thesis.store.PersonalStore',
+        'Thesis.store.TechnologyStore'
     ],
 
     title: 'Сотрудники',
@@ -36,9 +37,9 @@ Ext.define('Thesis.view.personal.PersonalGrid', {
     }],
 
     columns: [
-        {text: 'Технология', dataIndex: 'technology', align: 'left', flex: 1, editor: 'textfield'},
-        {text: 'Уровень владения', dataIndex: 'skill', align: 'left', flex: 1, editor: 'textfield'},
-        {text: 'Последнее использование', dataIndex: 'used', align: 'left', flex: 1, editor: 'textfield'},
+        {text: 'Технология', dataIndex: 'technology', align: 'left', flex: 1, editor: {xtype: 'combobox', store: 'technologyStore', displayField: 'name', valueField: 'name', editable: false, queryMode: 'local'}},
+        {text: 'Уровень владения', dataIndex: 'skill', align: 'left', flex: 1, editor: {xtype: 'combobox', store: 'skillStore', displayField: 'name', valueField: 'name', editable: false, queryMode: 'local'}},
+        {text: 'Последнее использование', dataIndex: 'used', align: 'left', flex: 1, editor: {xtype: 'combobox', store: 'usedStore', displayField: 'name', valueField: 'name', editable: false, queryMode: 'local'}},
         {text: 'Комментарий', dataIndex: 'commentary', align: 'left', flex: 1, editor: 'textfield'}
     ],
 
@@ -47,6 +48,25 @@ Ext.define('Thesis.view.personal.PersonalGrid', {
     plugins: {
         ptype: 'rowediting',
         clicksToEdit: 2
+    },
+
+    editor: {
+        xtype: 'combo',
+        // fieldLabel: 'Divisa',
+        // typeAhead: true,
+        // triggerAction: 'all',
+        // lazyRender:true,
+        // model: 'remote',
+        // triggerAction:    'all',
+        // loadingText: 'Cargando lista...',
+        // listClass: 'x-combo-list-small',
+        // hiddenName: 'id_divisa',
+        // displayField:'nombre',
+        // valueField:'id_divisa',
+        // width: 140,
+        // anchor: '100%',
+        // store: 'StoreDivisa',
+        // ref: '../../../../../../divisa_c'
     },
 
     listeners: {

@@ -66,6 +66,7 @@ Ext.define('Thesis.controller.UsedController', {
                     response = Ext.decode(response.responseText);
                     if (response.success) {
                         this.onUsedsUpdate();
+                        this.view.hide();
                     } else {
                         Ext.MessageBox.alert('Ошибка добавления', response.message);
                     }
@@ -75,7 +76,6 @@ Ext.define('Thesis.controller.UsedController', {
                 }
             });
             vm.set('name', null);
-            this.view.hide();
         } else {
             Ext.Msg.alert('Ошибка', 'Все поля должны быть заполнены!');
         }
