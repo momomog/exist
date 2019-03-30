@@ -1,3 +1,4 @@
+
 Ext.define('Thesis.controller.PersonalController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.personal',
@@ -25,7 +26,7 @@ Ext.define('Thesis.controller.PersonalController', {
                 var store = Ext.getStore('personalStore');
                 store.removeAll();
                 out: if (response.success) {
-                    if (response.personals === undefined) {
+                    if (response.personals.length === 0) {
                         break out;
                     } else {
                         for (var i = 0; i < response.personals.length; i++) {
@@ -52,9 +53,7 @@ Ext.define('Thesis.controller.PersonalController', {
     onAddPersonal: function () {
         var vm = this.getViewModel();
         var store = Ext.getStore('personalStore');
-
         var name = this.lookupReference('nameCombo').getValue();
-        console.log(name);
         var tech = this.lookupReference('technologyCombo').getValue();
         var skill = this.lookupReference('skillCombo').getValue();
         var used = this.lookupReference('usedCombo').getValue();
@@ -80,6 +79,7 @@ Ext.define('Thesis.controller.PersonalController', {
                     response = Ext.decode(response.responseText);
                     if (response.success) {
                         this.onPersonalsUpdate();
+                        this.view.hide();
                     } else {
                         Ext.MessageBox.alert('Ошибка добавления', response.message);
                     }
@@ -89,17 +89,15 @@ Ext.define('Thesis.controller.PersonalController', {
                 }
             });
             vm.set('commentary', null);
-            this.view.hide();
         } else {
             Ext.Msg.alert('Ошибка', 'Все поля должны быть заполнены!');
         }
     },
 
     onDeletePersonal: function () {
-        var store = Ext.getStore('personalStore');
+        // var store = Ext.getStore('personalStore');
         var grid = Ext.ComponentQuery.query('#personalGrid')[0];
         var id = grid.getSelectionModel().lastSelected.id;
-        console.log(grid.getSelectionModel().lastSelected);
 
         Ext.Ajax.request({
             url: 'http://localhost:8080/first',
@@ -125,14 +123,39 @@ Ext.define('Thesis.controller.PersonalController', {
         });
     },
 
+
+
     onPersonalEdit: function (roweditor, event) {
-        console.log(event);
         var newTechnology = event.newValues.technology;
         var newSkill = event.newValues.skill;
         var newUsed = event.newValues.used;
         var newCommentary = event.newValues.commentary;
         var id = event.record.id;
 
+        if(isNaN(newTechnology)){
+            var store = Ext.getStore('technologyStore').getRange();
+            for (var i = 0; i <store.length ; i++) {
+                if(store[i].data.name === newTechnology){
+                    newTechnology = store[i].id;
+                }
+            }
+        }
+        if(isNaN(newSkill)){
+            store = Ext.getStore('skillStore').getRange();
+            for (i = 0; i <store.length ; i++) {
+                if(store[i].data.name === newSkill){
+                    newSkill = store[i].id;
+                }
+            }
+        }
+        if(isNaN(newUsed)){
+            store = Ext.getStore('usedStore').getRange();
+            for (i = 0; i <store.length ; i++) {
+                if(store[i].data.name === newUsed){
+                    newUsed = store[i].id;
+                }
+            }
+        }
         Ext.Ajax.request({
             url: 'http://localhost:8080/first',
             method: 'POST',
