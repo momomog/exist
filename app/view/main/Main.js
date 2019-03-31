@@ -29,26 +29,31 @@ Ext.define('Thesis.view.main.Main', {
 
     items: [{
         title: 'Пользователь',
+        iconCls: 'x-fa fa-user-plus',
         items: [{
             xtype: 'usersgrid'
         }]
     }, {
         title: 'Технология',
+        iconCls: 'x-fa fa-leanpub',
         items: [{
             xtype: 'technologygrid'
         }]
     }, {
         title: 'Уровень владения',
+        iconCls: 'x-fa fa-level-up',
         items: [{
             xtype: 'skillgrid'
         }]
     }, {
         title: 'Последнее использование',
+        iconCls: 'x-fa fa-terminal',
         items: [{
             xtype: 'usedgrid'
         }]
     }, {
         title: 'Знания сотрудников',
+        iconCls: 'x-fa fa-users',
         items: [{
             xtype: 'personalgrid'
         }]
