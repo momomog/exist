@@ -4,7 +4,7 @@ Ext.define('Thesis.view.users.UserWindow', {
 
     controller: 'users',
     viewModel: 'users',
-    height: 140,
+    height: 180,
     width: 300,
     title: 'Добавить нового пользователя',
     defaultType: 'textfield',
@@ -14,12 +14,14 @@ Ext.define('Thesis.view.users.UserWindow', {
         allowBlank: false,
         fieldLabel: 'Имя',
         emptyText: 'name',
+        labelWidth:72,
         margin: 10,
         bind: '{name}'
     }, {
         allowBlank: false,
         fieldLabel: 'Эл. адрес',
         emptyText: 'email',
+        labelWidth:'auto',
         margin: 10,
         bind: '{email}'
     }],

@@ -11,8 +11,8 @@ Ext.define('Thesis.view.personal.PersonalWindow', {
     controller: 'personal',
     viewModel: 'personal',
 
-    height: 255,
-    width: 300,
+    height: 330,
+    width: 335,
     title: 'Добавить нового сотрудника',
     defaultType: 'textfield',
 
@@ -23,6 +23,7 @@ Ext.define('Thesis.view.personal.PersonalWindow', {
         displayField: 'name',
         valueField: 'id',
         editable: false,
+        labelWidth: 109,
         queryMode: 'local',
         reference: 'nameCombo',
         margin: 10
@@ -33,6 +34,7 @@ Ext.define('Thesis.view.personal.PersonalWindow', {
         displayField: 'name',
         valueField: 'id',
         editable: false,
+        labelWidth: 109,
         queryMode: 'local',
         reference: 'technologyCombo',
         margin: 10
@@ -43,6 +45,7 @@ Ext.define('Thesis.view.personal.PersonalWindow', {
         displayField: 'name',
         valueField: 'id',
         editable: false,
+        labelWidth: 109,
         queryMode: 'local',
         reference: 'skillCombo',
         margin: 10
@@ -53,12 +56,14 @@ Ext.define('Thesis.view.personal.PersonalWindow', {
         displayField: 'name',
         valueField: 'id',
         editable: false,
+        labelWidth:'auto',
         queryMode: 'local',
         reference: 'usedCombo',
         margin: 10
     }, {
         fieldLabel: 'Комментарий',
         emptyText: ' не обязательно',
+        labelWidth: 109,
         margin: 10,
         bind: '{commentary}'
     }],

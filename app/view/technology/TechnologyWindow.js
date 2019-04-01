@@ -4,15 +4,16 @@ Ext.define('Thesis.view.technology.TechnologyWindow', {
     controller: 'technology',
     viewModel: 'technology',
 
-    height: 110,
-    width: 310,
+    height: 137,
+    width: 335,
     title: 'Добавить технологию',
     defaultType: 'textfield',
 
     items: [{
-        allowBlank: false,
         fieldLabel: 'Наименование',
         emptyText: 'технология',
+        allowBlank: false,
+        labelWidth:'auto',
         margin: 10,
         bind: '{name}'
     }],

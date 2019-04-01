@@ -4,8 +4,8 @@ Ext.define('Thesis.view.used.UsedWindow', {
     controller: 'used',
     viewModel: 'used',
 
-    height: 110,
-    width: 310,
+    height: 137,
+    width: 335,
     title: 'Добавить интервал',
     defaultType: 'textfield',
 
@@ -13,6 +13,7 @@ Ext.define('Thesis.view.used.UsedWindow', {
         allowBlank: false,
         fieldLabel: 'Наименование',
         emptyText: 'интервал',
+        labelWidth:'auto',
         margin: 10,
         bind: '{name}'
     }],

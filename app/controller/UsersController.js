@@ -158,19 +158,21 @@ Ext.define('Thesis.controller.UsersController', {
         });
         if (this.state.isOpenToolbar) {
             var toolBar = Ext.create('Ext.toolbar.Toolbar', {
-                    width: 155,
-                    height: 30,
+                    width: 260,
+                    height: 46,
                     floating: true,
                     itemId: 'tool',
                     items: [{
                         text: 'Удалить пользователя',
+                        iconCls: 'x-fa fa-trash-o',
                         scope: this,
                         handler: function () {
                             this.onDeleteUser();
                             toolBar.hide();
                         }
                     }, {
-                        text: 'x',
+                        // text: 'Закрыть',
+                        iconCls: 'x-fa fa-times',
                         handler: function () {
                             toolBar.hide();
                         }

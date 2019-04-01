@@ -4,8 +4,8 @@ Ext.define('Thesis.view.skill.SkillWindow', {
     controller: 'skill',
     viewModel: 'skill',
 
-    height: 110,
-    width: 310,
+    height: 137,
+    width: 335,
     title: 'Добавить уровень владения',
     defaultType: 'textfield',
 
@@ -13,6 +13,7 @@ Ext.define('Thesis.view.skill.SkillWindow', {
         allowBlank: false,
         fieldLabel: 'Наименование',
         emptyText: 'уровень',
+        labelWidth:'auto',
         margin: 10,
         bind: '{name}'
     }],
