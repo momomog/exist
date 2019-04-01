@@ -24,15 +24,17 @@ Ext.define('Thesis.view.users.UsersGrid', {
             text: 'Добавить пользователя',
             margin: '0 5 0 0',
             handler: 'onCreateWindow'
-        }, {
-            xtype: 'button',
-            text: 'Удалить пользователя',
-            handler: 'onDeleteUser'
-        }, {
-            xtype: 'button',
-            text: 'Обновить данные',
-            handler: 'onUsersUpdate'
-        }]
+        },
+            //     {
+            //     xtype: 'button',
+            //     text: 'Удалить пользователя',
+            //     handler: 'onDeleteUser'
+            // },
+            {
+                xtype: 'button',
+                text: 'Обновить данные',
+                handler: 'onUsersUpdate'
+            }]
     }],
 
     columns: [
@@ -48,6 +50,8 @@ Ext.define('Thesis.view.users.UsersGrid', {
 
     listeners: {
         afterrender: 'onUsersUpdate',
-        edit: 'onUserEdit'
+        edit: 'onUserEdit',
+        cellcontextmenu: 'onUserOp',
+        cellmousedown: 'onUserOpClear'
     }
 });

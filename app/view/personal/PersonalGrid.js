@@ -37,18 +37,68 @@ Ext.define('Thesis.view.personal.PersonalGrid', {
     }],
 
     columns: [
-        {text: 'Технология', dataIndex: 'technology', align: 'left', flex: 1, editor: {xtype: 'combobox', store: 'technologyStore', displayField: 'name', valueField: 'id', editable: false, queryMode: 'local'}},
-        {text: 'Уровень владения', dataIndex: 'skill', align: 'left', flex: 1, editor: {xtype: 'combobox', store: 'skillStore', displayField: 'name', valueField: 'id', editable: false, queryMode: 'local'}},
-        {text: 'Последнее использование', dataIndex: 'used', align: 'left', flex: 1, editor: {xtype: 'combobox', store: 'usedStore', displayField: 'name', valueField: 'id', editable: false, queryMode: 'local'}},
+        {
+            text: 'Технология',
+            dataIndex: 'technology',
+            align: 'left',
+            flex: 1,
+            editor: {
+                xtype: 'combobox',
+                store: 'technologyStore',
+                displayField: 'name',
+                valueField: 'id',
+                editable: false,
+                queryMode: 'local'
+            },
+            filter: {
+                type: 'string',
+                emptyText: 'Введите текст...'
+            }
+        },
+        {
+            text: 'Уровень владения',
+            dataIndex: 'skill',
+            align: 'left',
+            flex: 1,
+            editor: {
+                xtype: 'combobox',
+                store: 'skillStore',
+                displayField: 'name',
+                valueField: 'id',
+                editable: false,
+                queryMode: 'local'
+            },
+            filter: {
+                type: 'string',
+                emptyText: 'Введите текст...'
+            }
+        },
+        {
+            text: 'Последнее использование',
+            dataIndex: 'used',
+            align: 'left',
+            flex: 1,
+            editor: {
+                xtype: 'combobox',
+                store: 'usedStore',
+                displayField: 'name',
+                valueField: 'id',
+                editable: false,
+                queryMode: 'local'
+            }
+        },
         {text: 'Комментарий', dataIndex: 'commentary', align: 'left', flex: 1, editor: 'textfield'}
     ],
 
     features: [{ftype: 'grouping'}],
 
-    plugins: {
+    plugins: [{
         ptype: 'rowediting',
         clicksToEdit: 2
-    },
+    }, {
+        ptype: 'gridfilters',
+        menuFilterText: 'Фильтр'
+    }],
 
     listeners: {
         afterrender: 'onPersonalsUpdate',

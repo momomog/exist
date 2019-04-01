@@ -18,7 +18,8 @@ Ext.define('Thesis.controller.SkillController', {
             params: {
                 data: Ext.encode({
                     "dataBase": "skills",
-                    "operation": "skillsUpdate"})
+                    "operation": "skillsUpdate"
+                })
             },
             success: function (response) {
                 response = Ext.decode(response.responseText);
@@ -59,7 +60,8 @@ Ext.define('Thesis.controller.SkillController', {
                     data: Ext.encode({
                         "dataBase": "skills",
                         "operation": "addSkillToDB",
-                        "name": skill})
+                        "name": skill
+                    })
                 },
                 scope: this,
                 success: function (response) {
@@ -92,7 +94,8 @@ Ext.define('Thesis.controller.SkillController', {
                 data: Ext.encode({
                     "dataBase": "skills",
                     "operation": "deleteSkillFromDB",
-                    "id": id})
+                    "id": id
+                })
             },
             scope: this,
             success: function (response) {

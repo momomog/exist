@@ -10,6 +10,11 @@ Ext.define('Thesis.controller.UsersController', {
         personal: 'Thesis.controller.PersonalController'
     },
 
+    state: {
+        isOpenToolbar: true,
+        count: 0
+    },
+
     onCreateWindow: function () {
         var myWin = Ext.create('Thesis.view.users.UserWindow');
         myWin.show();
@@ -22,7 +27,8 @@ Ext.define('Thesis.controller.UsersController', {
             params: {
                 data: Ext.encode({
                     "dataBase": "users",
-                    "operation": "usersUpdate"})
+                    "operation": "usersUpdate"
+                })
             },
             success: function (response) {
                 response = Ext.decode(response.responseText);
@@ -144,5 +150,52 @@ Ext.define('Thesis.controller.UsersController', {
                 Ext.MessageBox.alert('Ошибка!', err);
             }
         });
+    },
+
+    onUserOp: function (e, target, view, record, item, index, event) {
+        Ext.getDoc().on('contextmenu', function(ev) {
+            ev.preventDefault();
+        });
+        if (this.state.isOpenToolbar) {
+            var toolBar = Ext.create('Ext.toolbar.Toolbar', {
+                    width: 155,
+                    height: 30,
+                    floating: true,
+                    itemId: 'tool',
+                    items: [{
+                        text: 'Удалить пользователя',
+                        scope: this,
+                        handler: function () {
+                            this.onDeleteUser();
+                            toolBar.hide();
+                        }
+                    }, {
+                        text: 'x',
+                        handler: function () {
+                            toolBar.hide();
+                        }
+                    }]
+                }
+            );
+            toolBar.showAt(event.getXY());
+            this.state.isOpenToolbar = false;
+        } else {
+            var tool = Ext.ComponentQuery.query('#tool');
+            tool[this.state.count].hide();
+            this.state.isOpenToolbar = true;
+            this.state.count++;
+        }
+    },
+
+    onUserOpClear: function () {
+        var tool = Ext.ComponentQuery.query('#tool');
+        if(!(tool[this.state.count] === undefined)) {
+            tool[this.state.count].hide();
+            this.state.isOpenToolbar = true;
+            this.state.count++;
+        }else{
+
+        }
     }
+
 });

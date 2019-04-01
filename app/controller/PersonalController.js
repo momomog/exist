@@ -1,4 +1,3 @@
-
 Ext.define('Thesis.controller.PersonalController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.personal',
@@ -19,7 +18,8 @@ Ext.define('Thesis.controller.PersonalController', {
             params: {
                 data: Ext.encode({
                     "dataBase": "personals",
-                    "operation": "personalsUpdate"})
+                    "operation": "personalsUpdate"
+                })
             },
             success: function (response) {
                 response = Ext.decode(response.responseText);
@@ -95,7 +95,6 @@ Ext.define('Thesis.controller.PersonalController', {
     },
 
     onDeletePersonal: function () {
-        // var store = Ext.getStore('personalStore');
         var grid = Ext.ComponentQuery.query('#personalGrid')[0];
         var id = grid.getSelectionModel().lastSelected.id;
 
@@ -106,7 +105,8 @@ Ext.define('Thesis.controller.PersonalController', {
                 data: Ext.encode({
                     "dataBase": "personals",
                     "operation": "deletePersonal",
-                    "id": id})
+                    "id": id
+                })
             },
             scope: this,
             success: function (response) {
@@ -124,7 +124,6 @@ Ext.define('Thesis.controller.PersonalController', {
     },
 
 
-
     onPersonalEdit: function (roweditor, event) {
         var newTechnology = event.newValues.technology;
         var newSkill = event.newValues.skill;
@@ -132,26 +131,26 @@ Ext.define('Thesis.controller.PersonalController', {
         var newCommentary = event.newValues.commentary;
         var id = event.record.id;
 
-        if(isNaN(newTechnology)){
+        if (isNaN(newTechnology)) {
             var store = Ext.getStore('technologyStore').getRange();
-            for (var i = 0; i <store.length ; i++) {
-                if(store[i].data.name === newTechnology){
+            for (var i = 0; i < store.length; i++) {
+                if (store[i].data.name === newTechnology) {
                     newTechnology = store[i].id;
                 }
             }
         }
-        if(isNaN(newSkill)){
+        if (isNaN(newSkill)) {
             store = Ext.getStore('skillStore').getRange();
-            for (i = 0; i <store.length ; i++) {
-                if(store[i].data.name === newSkill){
+            for (i = 0; i < store.length; i++) {
+                if (store[i].data.name === newSkill) {
                     newSkill = store[i].id;
                 }
             }
         }
-        if(isNaN(newUsed)){
+        if (isNaN(newUsed)) {
             store = Ext.getStore('usedStore').getRange();
-            for (i = 0; i <store.length ; i++) {
-                if(store[i].data.name === newUsed){
+            for (i = 0; i < store.length; i++) {
+                if (store[i].data.name === newUsed) {
                     newUsed = store[i].id;
                 }
             }

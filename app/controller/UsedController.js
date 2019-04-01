@@ -19,7 +19,8 @@ Ext.define('Thesis.controller.UsedController', {
             params: {
                 data: Ext.encode({
                     "dataBase": "useds",
-                    "operation": "usedsUpdate"})
+                    "operation": "usedsUpdate"
+                })
             },
             success: function (response) {
                 response = Ext.decode(response.responseText);
@@ -59,7 +60,8 @@ Ext.define('Thesis.controller.UsedController', {
                     data: Ext.encode({
                         "dataBase": "useds",
                         "operation": "addUsedToDB",
-                        "name": used})
+                        "name": used
+                    })
                 },
                 scope: this,
                 success: function (response) {
@@ -92,7 +94,8 @@ Ext.define('Thesis.controller.UsedController', {
                 data: Ext.encode({
                     "dataBase": "useds",
                     "operation": "deleteUsedFromDB",
-                    "id": id})
+                    "id": id
+                })
             },
             scope: this,
             success: function (response) {
