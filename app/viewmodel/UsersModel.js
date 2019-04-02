@@ -6,6 +6,8 @@ Ext.define('Thesis.viewmodel.UsersModel', {
 
     data: {
         name: null,
-        email: null
+        email: null,
+        phoneCode: null,
+        phone: null
     }
 });

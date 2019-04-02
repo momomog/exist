@@ -4,8 +4,8 @@ Ext.define('Thesis.view.users.UserWindow', {
 
     controller: 'users',
     viewModel: 'users',
-    height: 180,
-    width: 300,
+    height: 187,
+    width: 305,
     title: 'Добавить нового пользователя',
     defaultType: 'textfield',
     itemId: 'win',

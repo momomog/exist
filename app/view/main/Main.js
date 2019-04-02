@@ -29,7 +29,7 @@ Ext.define('Thesis.view.main.Main', {
 
     items: [{
         title: 'Пользователь',
-        iconCls: 'x-fa fa-user-plus',
+        iconCls: 'x-fa fa-user',
         items: [{
             xtype: 'usersgrid'
         }]
