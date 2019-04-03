@@ -43,33 +43,62 @@ Ext.define('Thesis.view.users.UserForm', {
         }, {
             xtype: 'panel',
             layout: 'hbox',
+            items: [{
+                xtype: 'combobox',
+                fieldLabel: 'Телефон',
+                displayField: 'code',
+                valueField: 'code',
+                queryMode: 'local',
+                editable: false,
+                width: 200,
+                margin: '0 5 0 0',
+                bind: {
+                    value: '{phoneCode}',
+                    store: '{codeStore}'
+                }
+            }, {
+                xtype: 'textfield',
+                name: 'phone',
+                vtype: 'phone',
+                plugins: new Ext.ux.plugin.FormatPhoneNumber(),
+                bind: {
+                    value: '{phone}'
+                }
+            }, {
+                xtype: 'button',
+                text: 'Добавить',
+                iconCls: 'x-fa fa-plus-square-o',
+                margin: '0 0 0 10',
+                handler: 'addPhoneToStore'
+            }
+            ]
+        }, {
+            xtype: 'panel',
+            layout: 'hbox',
+            margin: '10 0 0 0',
             items: [
                 {
                     xtype: 'combobox',
-                    store: Ext.create('Ext.data.Store', {
-                        fields: ['code'],
-                        data: [
-                            {"code": "+7"}, {"code": "+375"}, {"code": "+380"}, {"code": "+994"}, {"code": "+373"}
-                        ]
-                    }),
-                    fieldLabel: 'Телефон',
-                    displayField: 'code',
-                    valueField: 'code',
+                    allowBlank: true,
+                    fieldLabel: 'Список номеров',
+                    displayField: 'number',
+                    valueField: 'number',
                     queryMode: 'local',
-                    width: 200,
-                    margin: '0 5 0 0',
-                    bind: '{phoneCode}'
-                }, {
-                    xtype: 'textfield',
-                    name: 'phone',
-                    vtype: 'phone',
-                    plugins: new Ext.ux.plugin.FormatPhoneNumber(),
-                    bind: '{phone}'
+                    margin: '0 0 5 0',
+                    // labelWidth:'auto',
+                    width: 405,
+                    bind: {
+                        value: '{phonesStoreValue}',
+                        store: '{phonesStore}'
+                    }
                 }, {
                     xtype: 'button',
-                    text: '+',
-                    margin: '0 0 0 10'
-                },
+                    text: 'Удалить',
+                    margin: '5 0 0 10',
+                    width: 112,
+                    iconCls: 'x-fa fa-trash-o',
+                    handler: 'deletePhoneFromStore'
+                }
             ]
         }
         ]

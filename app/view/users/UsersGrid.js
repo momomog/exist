@@ -40,15 +40,16 @@ Ext.define('Thesis.view.users.UsersGrid', {
         {text: 'Телефон', dataIndex: 'phone', align: 'left', flex: 1.5, editor: 'textfield'}
     ],
 
-    plugins: {
-        ptype: 'rowediting',
-        clicksToEdit: 2
-    },
+    // plugins: {
+    //     ptype: 'rowediting',
+    //     clicksToEdit: 2
+    // },
 
     listeners: {
         afterrender: 'onUsersUpdate',
-        edit: 'onUserEdit',
+        // edit: 'onUserEdit',
         cellcontextmenu: 'onUserOp',
-        cellmousedown: 'onUserOpClear'
+        cellmousedown: 'onUserOpClear',
+        rowdblclick: 'onUserEdit'
     }
 });

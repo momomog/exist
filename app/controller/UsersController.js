@@ -8,7 +8,8 @@ Ext.define('Thesis.controller.UsersController', {
 
     state: {
         isOpenToolbar: true,
-        count: 0
+        toolbarCount: 0,
+        phonesCount: 0
     },
 
     onCreateForm: function () {
@@ -16,13 +17,40 @@ Ext.define('Thesis.controller.UsersController', {
         grid.hide();
         var myForm = Ext.create('Thesis.view.users.UserForm');
         myForm.showAt(265, 0);
-        myForm.show();
     },
 
     onCancelForm: function () {
         this.view.hide();
         var grid = Ext.ComponentQuery.query('#usersGrid')[0];
         grid.show();
+    },
+
+    addPhoneToStore: function () {
+        var vm = this.getViewModel();
+        var phone = vm.get('phone');
+        var phoneCode = vm.get('phoneCode');
+
+        if (!(phone === null || phoneCode === null)) {
+            var phonesStore = vm.get('phonesStore');
+            if (!phonesStore.find('number', phoneCode + ' ' + phone)) {
+                Ext.toast('Данный номер уже зарегестрирован для пользователя!');
+            } else {
+                phonesStore.add({number: phoneCode + ' ' + phone});
+                vm.set('phonesStoreValue', phoneCode + ' ' + phone);
+                Ext.toast('Добавлено!');
+            }
+        } else {
+            Ext.toast('Выберете код и введите корректный номер телефона!');
+        }
+
+    },
+
+    deletePhoneFromStore: function () {
+        var vm = this.getViewModel();
+        var phone = vm.get('phonesStoreValue');
+        var phonesStore = vm.get('phonesStore');
+        phonesStore.removeAt(phonesStore.find('number', phone));
+        vm.set('phonesStoreValue', null);
     },
 
     onUsersUpdate: function () {
@@ -69,6 +97,18 @@ Ext.define('Thesis.controller.UsersController', {
         var email = vm.get('email');
         var phone = vm.get('phone');
         var phoneCode = vm.get('phoneCode');
+        var phonesStore = vm.get('phonesStore');
+        var allRecords = phonesStore.getData().getRange();
+        var allUserPhones = '';
+
+        if (allRecords.length !== 0) {
+            for (var i = 0; i < allRecords.length; i++) {
+                allUserPhones += allRecords[i].data.number + '; ';
+            }
+            allUserPhones = allUserPhones.slice(0, -2);
+        } else {
+            allUserPhones = phoneCode + ' ' + phone;
+        }
 
         if (!(!name || !email || !phone || name.trim(' ').length === 0 || email.trim(' ').length === 0)) {
             Ext.Ajax.request({
@@ -80,7 +120,7 @@ Ext.define('Thesis.controller.UsersController', {
                         "operation": "addNewUser",
                         "name": name,
                         "email": email,
-                        "phone": phoneCode + ' ' + phone
+                        "phone": allUserPhones
                     })
                 },
                 scope: this,
@@ -135,39 +175,169 @@ Ext.define('Thesis.controller.UsersController', {
         });
     },
 
-    onUserEdit: function (roweditor, event) {
-        var newName = event.newValues.name;
-        var newEmail = event.newValues.email;
-        var newPhone = event.newValues.phone;
-        var id = event.newValues.id;
+    onUserEdit: function (record, element, rowIndex, e, eOpts) {
+        var editPanel = Ext.create('Ext.form.Panel', {
+            title: 'Редактирование',
 
-        Ext.Ajax.request({
-            url: 'http://localhost:8080/first',
-            method: 'POST',
-            params: {
-                data: Ext.encode({
-                    "dataBase": "users",
-                    "operation": "updateUser",
-                    "name": newName,
-                    "email": newEmail,
-                    "phone": newPhone,
-                    "id": id
-                })
-            },
-            scope: this,
-            success: function (response) {
-                response = Ext.decode(response.responseText);
-                if (response.success) {
-                    this.onUsersUpdate();
-                } else {
-                    Ext.MessageBox.alert('Ошибка при редактировании', response.message);
+            controller: 'users',
+            viewModel: {
+                data: {
+                    name: null,
+                    email: null,
+                    phone: null,
+                    phoneCode: null
+                },
+
+                stores: {
+                    codeStore: {
+                        data: [
+                            {"code": "+7"},
+                            {"code": "+375"},
+                            {"code": "+380"},
+                            {"code": "+994"},
+                            {"code": "+373"}
+                        ]
+                    }
                 }
             },
-            failure: function (err) {
-                Ext.MessageBox.alert('Ошибка!', err);
+
+            floating: true,
+            frame: true,
+            width: 1260,
+            height: 750,
+
+            items: [{
+                xtype: 'fieldset',
+                title: 'Информация',
+                defaultType: 'textfield',
+                itemId: 'fieldId',
+                fieldDefaults: {
+                    labelAlign: 'right',
+                    labelWidth: 115,
+                    msgTarget: 'under',
+                    blankText: 'Поле должно быть заполнено',
+                    allowBlank: false
+                },
+                items: [{
+                    xtype: 'panel',
+                    items: [
+                        {
+                            xtype: 'textfield',
+                            fieldLabel: 'Имя',
+                            name: 'name',
+                            colspan: 2,
+                            bind: '{name}'
+
+                        }, {
+                            xtype: 'textfield',
+                            fieldLabel: 'Эл. адрес',
+                            name: 'email',
+                            colspan: 2,
+                            bind: '{email}'
+                        }]
+                }
+                ]
+            }],
+
+            buttons: [{
+                text: 'Сохранить',
+                iconCls: 'x-fa fa-floppy-o',
+                disabled: true,
+                formBind: true
+                // handler: 'onAddUser'
+            }, {
+                text: 'Отмена',
+                iconCls: 'x-fa fa-times',
+                handler: 'onCancelForm'
+            }],
+
+            listeners: {
+                beforerender: function () {
+                    // console.log(record);
+                    // console.log(element);
+
+                    var vm = this.getViewModel();
+                    vm.set('name', element.data.name);
+                    vm.set('email', element.data.email);
+
+                    var phonesArray = element.data.phone.split('; ');
+
+                    for (var i = 0; i < phonesArray.length; i++) {
+                      var fieldId =  Ext.ComponentQuery.query('#fieldId')[0].add({
+                            xtype: 'panel',
+                            layout: 'hbox',
+                            margin: '0 0 10 0',
+                            items: [{
+                                xtype: 'combobox',
+                                fieldLabel: 'Телефон',
+                                displayField: 'code',
+                                valueField: 'code',
+                                queryMode: 'local',
+                                editable: false,
+                                width: 200,
+                                margin: '0 5 0 0',
+                                bind: {
+                                    value: '{phoneCode}',
+                                    store: '{codeStore}'
+                                }
+                            }, {
+                                xtype: 'textfield',
+                                name: 'phone',
+                                vtype: 'phone',
+                                plugins: new Ext.ux.plugin.FormatPhoneNumber(),
+                                bind: {
+                                    value: '{phone}'
+                                }
+                            }
+                            ]
+                            // renderTo: Ext.getBody()
+                        });
+                    }
+                    var fstPhone = phonesArray[0].split(' ');
+                    console.log(fieldId);
+
+                    vm.set('phoneCode', fstPhone[0]);
+                    vm.set('phone', fstPhone[1] + fstPhone[2].replace(/[^0-9]/gim, ''));
+
+                }
             }
         });
+        editPanel.showAt(265, 0);
     },
+
+    // onUserEdit: function (roweditor, event) {
+    //     var newName = event.newValues.name;
+    //     var newEmail = event.newValues.email;
+    //     var newPhone = event.newValues.phone;
+    //     var id = event.newValues.id;
+    //
+    //     Ext.Ajax.request({
+    //         url: 'http://localhost:8080/first',
+    //         method: 'POST',
+    //         params: {
+    //             data: Ext.encode({
+    //                 "dataBase": "users",
+    //                 "operation": "updateUser",
+    //                 "name": newName,
+    //                 "email": newEmail,
+    //                 "phone": newPhone,
+    //                 "id": id
+    //             })
+    //         },
+    //         scope: this,
+    //         success: function (response) {
+    //             response = Ext.decode(response.responseText);
+    //             if (response.success) {
+    //                 this.onUsersUpdate();
+    //             } else {
+    //                 Ext.MessageBox.alert('Ошибка при редактировании', response.message);
+    //             }
+    //         },
+    //         failure: function (err) {
+    //             Ext.MessageBox.alert('Ошибка!', err);
+    //         }
+    //     });
+    // },
 
     onUserOp: function (e, target, view, record, item, index, event) {
         Ext.getDoc().on('contextmenu', function (ev) {
@@ -199,18 +369,18 @@ Ext.define('Thesis.controller.UsersController', {
             this.state.isOpenToolbar = false;
         } else {
             var tool = Ext.ComponentQuery.query('#tool');
-            tool[this.state.count].hide();
+            tool[this.state.toolbarCount].hide();
             this.state.isOpenToolbar = true;
-            this.state.count++;
+            this.state.toolbarCount++;
         }
     },
 
     onUserOpClear: function () {
         var tool = Ext.ComponentQuery.query('#tool');
-        if (!(tool[this.state.count] === undefined)) {
-            tool[this.state.count].hide();
+        if (!(tool[this.state.toolbarCount] === undefined)) {
+            tool[this.state.toolbarCount].hide();
             this.state.isOpenToolbar = true;
-            this.state.count++;
+            this.state.toolbarCount++;
         }
     }
 });
@@ -225,7 +395,7 @@ Ext.apply(Ext.form.VTypes, {
 });
 
 Ext.apply(Ext.util.Format, {
-    phoneNumber: function(value) {
+    phoneNumber: function (value) {
         var phoneNumber = value.replace(/\./g, '').replace(/-/g, '').replace(/[^0-9]/g, '');
 
         if (phoneNumber != '' && phoneNumber.length == 10) {
@@ -239,10 +409,10 @@ Ext.apply(Ext.util.Format, {
 Ext.namespace('Ext.ux.plugin');
 
 Ext.ux.plugin.FormatPhoneNumber = Ext.extend(Ext.form.TextField, {
-    init: function(c) {
+    init: function (c) {
         c.on('change', this.onChange, this);
     },
-    onChange: function(c) {
+    onChange: function (c) {
         c.setValue(Ext.util.Format.phoneNumber(c.getValue()));
     }
 });

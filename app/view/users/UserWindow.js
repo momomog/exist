@@ -1,7 +1,6 @@
 Ext.define('Thesis.view.users.UserWindow', {
     extend: 'Ext.window.Window',
 
-
     controller: 'users',
     viewModel: 'users',
     height: 187,
