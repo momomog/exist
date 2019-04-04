@@ -30,26 +30,26 @@ Ext.define('Thesis.view.users.UsersGrid', {
             iconCls: 'x-fa fa-refresh',
             text: 'Обновить данные',
             handler: 'onUsersUpdate'
+        }, {
+            xtype: 'button',
+            iconCls: 'x-fa fa-tree',
+            text: 'Показать дерево пользователя',
+            margin: '0 5 0 0',
+            handler: 'onCreateTreepanel'
         }]
     }],
 
     columns: [
         {text: 'Id', dataIndex: 'id', align: 'left'},
-        {text: 'Имя', dataIndex: 'name', align: 'left', flex: 1, editor: 'textfield'},
-        {text: 'Электронный адрес', dataIndex: 'email', align: 'left', flex: 1.5, editor: 'textfield'},
-        {text: 'Телефон', dataIndex: 'phone', align: 'left', flex: 1.5, editor: 'textfield'}
+        {text: 'Имя', dataIndex: 'name', align: 'left', flex: 1},
+        {text: 'Электронный адрес', dataIndex: 'email', align: 'left', flex: 1},
+        {text: 'Телефон', dataIndex: 'phone', align: 'left', flex: 2}
     ],
-
-    // plugins: {
-    //     ptype: 'rowediting',
-    //     clicksToEdit: 2
-    // },
 
     listeners: {
         afterrender: 'onUsersUpdate',
-        // edit: 'onUserEdit',
         cellcontextmenu: 'onUserOp',
         cellmousedown: 'onUserOpClear',
-        rowdblclick: 'onUserEdit'
+        rowdblclick: 'onCreateEditPanel'
     }
 });

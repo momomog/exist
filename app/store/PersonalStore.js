@@ -15,10 +15,6 @@ Ext.define('Thesis.store.PersonalStore', {
         reader: {
             type: 'json',
             rootProperty: 'personals'
-        },
-        writer: {
-            type: 'json',
-            writeAllFields: true
         }
     }
 });

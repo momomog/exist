@@ -8,29 +8,9 @@ Ext.define('Thesis.viewmodel.UsersModel', {
         name: null,
         email: null,
         phone: null,
-        phoneCode: null
+        phoneCode: null,
+        userName: null
     },
-
-    // formulas: {
-    //     phoneMask: {
-    //         get: function (get) {
-    //             return get('name') * 3;
-    //         },
-    //
-    //         set: function (value) {
-    //             this.set({
-    //                 phoneMask: value * 10
-    //             });
-    //         }
-    //     },
-    //     addPhoneToStore:  function (get) {
-    //             var code = get('phoneCode');
-    //             var phone = get('phone');
-    //             var phonesStore = get('phonesStore');
-    //             phonesStore.add('number', code + phone);
-    //     },
-    //
-    // },
 
     stores: {
         codeStore: {
@@ -43,9 +23,6 @@ Ext.define('Thesis.viewmodel.UsersModel', {
             ]
         },
         phonesStore: {
-            data: [
-                // {"number": "+7546456"},
-            ]
         }
     }
 });

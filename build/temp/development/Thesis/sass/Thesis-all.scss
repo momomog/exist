@@ -917,6 +917,7 @@ $include-thesis-store-personalstore: dynamic(true);;
 $include-thesis-store-skillstore: dynamic(true);;
 $include-thesis-store-technologystore: dynamic(true);;
 $include-thesis-store-usedstore: dynamic(true);;
+$include-thesis-store-usertreestore: dynamic(true);;
 $include-thesis-store-usersstore: dynamic(true);;
 $include-thesis-view-main-main: dynamic(true);;
 $include-thesis-view-personal-personalgrid: dynamic(true);;
@@ -927,7 +928,9 @@ $include-thesis-view-technology-technologygrid: dynamic(true);;
 $include-thesis-view-technology-technologywindow: dynamic(true);;
 $include-thesis-view-used-usedgrid: dynamic(true);;
 $include-thesis-view-used-usedwindow: dynamic(true);;
+$include-thesis-view-users-usereditform: dynamic(true);;
 $include-thesis-view-users-userform: dynamic(true);;
+$include-thesis-view-users-usertree: dynamic(true);;
 $include-thesis-view-users-userwindow: dynamic(true);;
 $include-thesis-view-users-usersgrid: dynamic(true);;
 $include-thesis-viewmodel-mainmodel: dynamic(true);;
@@ -936,6 +939,7 @@ $include-thesis-viewmodel-skillmodel: dynamic(true);;
 $include-thesis-viewmodel-technologymodel: dynamic(true);;
 $include-thesis-viewmodel-usedmodel: dynamic(true);;
 $include-thesis-viewmodel-usersmodel: dynamic(true);;
+$include-thesis-viewmodel-userstreepanelmodel: dynamic(true);;
 $output-paths: ("path": "../resources");
 
 /* ======================== ETC ======================== */

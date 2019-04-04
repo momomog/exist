@@ -1,3 +1,7 @@
+///
+/// не используется!
+///
+
 Ext.define('Thesis.view.users.UserWindow', {
     extend: 'Ext.window.Window',
 
