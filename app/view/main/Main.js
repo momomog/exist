@@ -4,7 +4,8 @@ Ext.define('Thesis.view.main.Main', {
     mixins: {
         skill: 'Thesis.controller.SkillController',
         tech: 'Thesis.controller.TechnologyController',
-        lastUsed: 'Thesis.controller.UsedController'
+        lastUsed: 'Thesis.controller.UsedController',
+        peronal: 'Thesis.controller.PersonalController'
     },
 
     requires: [
@@ -65,6 +66,7 @@ Ext.define('Thesis.view.main.Main', {
             this.onSkillsUpdate();
             this.onTechnologiesUpdate();
             this.onUsedsUpdate();
+            this.onPersonalsUpdate();
         }
     }
 });

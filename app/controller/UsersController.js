@@ -11,32 +11,110 @@ Ext.define('Thesis.controller.UsersController', {
     state: {
         isOpenToolbar: true,
         toolbarCount: 0,
-        phonesCount: 0,
         editPanelCount: 0,
         treePanelCount: 0
     },
 
-    onCreateTreepanel: function () {
+    onCreateTreepanel: function (btn) {
         var grid = Ext.ComponentQuery.query('#usersGrid')[0];
 
-        if(grid.getSelectionModel().lastSelected === undefined){
-            Ext.toast('Необходимо выбрать пользователя!');
-        } else {
+        if (btn.text === 'Показать знания всех пользователей') {
             grid.hide();
-            var myForm = Ext.create('Thesis.view.users.UserTree');
-            var name = grid.getSelectionModel().lastSelected.data.name;
-            var tree = Ext.ComponentQuery.query('#userTree')[this.state.treePanelCount];
+            var allUsersTree = Ext.create('Thesis.view.users.UserTree');
+            var currentTree = Ext.ComponentQuery.query('#userTree')[this.state.treePanelCount];
             this.state.treePanelCount++;
-            var treeNode = tree.getRootNode();
-            treeNode.data.text = name;
+            var allUsersRootNode = currentTree.getRootNode();
+            allUsersRootNode.data.text = 'Пользователи';
 
-            // treeNode.appendChild({
-            //     text: name,
-            //     leaf: true
-            // });
+            var personalStore = Ext.getStore('personalStore');
+            var personalStoreAllData = personalStore.getData().getRange();
 
-            myForm.showAt(265, 0);
+            var vm = this.getViewModel();
+            var userTreeStore = vm.get('treeStore');
+            // var userTreeStore = Ext.getStore('treeStore');
 
+            var userTreeStoreAllData = userTreeStore.getData().getRange();
+
+            for (var i = 0; i < personalStoreAllData.length; i++) {
+
+                for (var j = 0; j < userTreeStoreAllData.length; j++) {
+
+                    if (userTreeStoreAllData[j].data.text === personalStoreAllData[i].data.Name) {
+                        userTechnologyNode = userTreeStoreAllData[j].appendChild({
+                            text: personalStoreAllData[i].data.technology,
+                            leaf: true,
+                            expanded: true
+                        });
+                        userSkillNode = userTechnologyNode.appendChild({
+                            text: personalStoreAllData[i].data.skill,
+                            leaf: true,
+                            expanded: true
+                        });
+                        userLastUsedNode = userSkillNode.appendChild({
+                            text: personalStoreAllData[i].data.used,
+                            leaf: true
+                        });
+                    }
+
+                }
+                var userNameNode = allUsersRootNode.appendChild({
+                    text: personalStoreAllData[i].data.Name,
+                    leaf: true,
+                    expanded: true
+                });
+                var userTechnologyNode = userNameNode.appendChild({
+                    text: personalStoreAllData[i].data.technology,
+                    leaf: true,
+                    expanded: true
+                });
+                var userSkillNode = userTechnologyNode.appendChild({
+                    text: personalStoreAllData[i].data.skill,
+                    leaf: true,
+                    expanded: true
+                });
+                var userLastUsedNode = userSkillNode.appendChild({
+                    text: personalStoreAllData[i].data.used,
+                    leaf: true
+                });
+
+            }
+            console.log(userTreeStore.getData().getRange());
+            allUsersTree.showAt(265, 0);
+        } else {
+            if (grid.getSelectionModel().lastSelected === undefined) {
+                Ext.toast('Необходимо выбрать пользователя!');
+            } else {
+                grid.hide();
+                var myForm = Ext.create('Thesis.view.users.UserTree');
+                var userName = grid.getSelectionModel().lastSelected.data.name;
+                var tree = Ext.ComponentQuery.query('#userTree')[this.state.treePanelCount];
+                this.state.treePanelCount++;
+                var rootNode = tree.getRootNode();
+                rootNode.data.text = userName;
+
+                personalStore = Ext.getStore('personalStore');
+                personalStoreAllData = personalStore.getData().getRange();
+
+                for (i = 0; i < personalStoreAllData.length; i++) {
+                    if (personalStoreAllData[i].data.Name === userName) {
+                        userTechnologyNode = rootNode.appendChild({
+                            text: personalStoreAllData[i].data.technology,
+                            leaf: true,
+                            expanded: true
+                        });
+                        userSkillNode = userTechnologyNode.appendChild({
+                            text: personalStoreAllData[i].data.skill,
+                            leaf: true,
+                            expanded: true
+                        });
+                        userLastUsedNode = userSkillNode.appendChild({
+                            text: personalStoreAllData[i].data.used,
+                            leaf: true
+                        });
+                    }
+                }
+                myForm.showAt(265, 0);
+            }
         }
     },
 
@@ -236,7 +314,7 @@ Ext.define('Thesis.controller.UsersController', {
                     xtype: 'textfield',
                     name: 'phone',
                     vtype: 'phone',
-                    value: phone[1] + phone[2],
+                    value: phone[1] + ' ' + phone[2],
                     plugins: new Ext.ux.plugin.FormatPhoneNumber()
                 }
                 ]
@@ -359,7 +437,7 @@ Ext.apply(Ext.util.Format, {
     phoneNumber: function (value) {
         var phoneNumber = value.replace(/\./g, '').replace(/-/g, '').replace(/[^0-9]/g, '');
 
-        if (phoneNumber != '' && phoneNumber.length == 10) {
+        if (phoneNumber !== '' && phoneNumber.length === 10) {
             return '(' + phoneNumber.substr(0, 3) + ') ' + phoneNumber.substr(3, 3) + '-' + phoneNumber.substr(6, 4);
         } else {
             return value;

@@ -2,13 +2,17 @@ Ext.define('Thesis.view.users.UserTree', {
     extend: 'Ext.tree.Panel',
 
     controller: 'users',
-    viewmodel: {
+    viewmodel:  {
         type: 'users'
     },
+
     store: {
-        type: 'userstore'
+        type: 'userTreeStore'
     },
 
+    // bind:{
+    //     store: '{treeStore}'
+    // },
 
     title: 'Дерево пользователя',
     itemId: 'userTree',
