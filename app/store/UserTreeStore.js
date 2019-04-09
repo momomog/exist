@@ -1,7 +1,7 @@
 Ext.define('Thesis.store.UserTreeStore', {
     extend: 'Ext.data.TreeStore',
     alias: 'store.userTreeStore',
-    // storeId: 'userTreeStore',
+   // storeId: 'userTreeStore',
 
     fields: [{
         name: 'text',
@@ -9,8 +9,14 @@ Ext.define('Thesis.store.UserTreeStore', {
     }],
 
     root: {
-        leaf: false,
-        expanded: true
+        leaf: true,
+        expanded: false,
+        // children:
+        //     [{
+        //         text: "Карл Михеев",
+        //         leaf: false,
+        //         expanded: true
+        //     }]
     },
 
     proxy: {

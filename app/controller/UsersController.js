@@ -31,11 +31,11 @@ Ext.define('Thesis.controller.UsersController', {
 
             var vm = this.getViewModel();
             var userTreeStore = vm.get('treeStore');
-            // var userTreeStore = Ext.getStore('treeStore');
 
+            var userTreeStore = Ext.getStore('userTreeStore');
             var userTreeStoreAllData = userTreeStore.getData().getRange();
 
-            for (var i = 0; i < personalStoreAllData.length; i++) {
+            here: for (var i = 0; i < personalStoreAllData.length; i++) {
 
                 for (var j = 0; j < userTreeStoreAllData.length; j++) {
 
@@ -43,7 +43,7 @@ Ext.define('Thesis.controller.UsersController', {
                         userTechnologyNode = userTreeStoreAllData[j].appendChild({
                             text: personalStoreAllData[i].data.technology,
                             leaf: true,
-                            expanded: true
+                            expanded: false
                         });
                         userSkillNode = userTechnologyNode.appendChild({
                             text: personalStoreAllData[i].data.skill,
@@ -54,8 +54,8 @@ Ext.define('Thesis.controller.UsersController', {
                             text: personalStoreAllData[i].data.used,
                             leaf: true
                         });
+                        continue here;
                     }
-
                 }
                 var userNameNode = allUsersRootNode.appendChild({
                     text: personalStoreAllData[i].data.Name,
@@ -65,7 +65,7 @@ Ext.define('Thesis.controller.UsersController', {
                 var userTechnologyNode = userNameNode.appendChild({
                     text: personalStoreAllData[i].data.technology,
                     leaf: true,
-                    expanded: true
+                    expanded: false
                 });
                 var userSkillNode = userTechnologyNode.appendChild({
                     text: personalStoreAllData[i].data.skill,
@@ -76,9 +76,7 @@ Ext.define('Thesis.controller.UsersController', {
                     text: personalStoreAllData[i].data.used,
                     leaf: true
                 });
-
             }
-            console.log(userTreeStore.getData().getRange());
             allUsersTree.showAt(265, 0);
         } else {
             if (grid.getSelectionModel().lastSelected === undefined) {
@@ -89,8 +87,26 @@ Ext.define('Thesis.controller.UsersController', {
                 var userName = grid.getSelectionModel().lastSelected.data.name;
                 var tree = Ext.ComponentQuery.query('#userTree')[this.state.treePanelCount];
                 this.state.treePanelCount++;
-                var rootNode = tree.getRootNode();
+
+                myForm.setViewModel('treepanel');
+                vm = myForm.getViewModel();
+                // myForm.setBind({
+                //     store: '{treeStore}'
+                // });
+
+
+                //var rootNode = tree.getRootNode();
+                // console.log(rootNode);
+                //rootNode.data.text = 'Пользователиq';
+
+
+                userTreeStore = vm.getStore('treeStore');
+                var rootNode = userTreeStore.getRootNode();
                 rootNode.data.text = userName;
+               // debugger;
+
+
+
 
                 personalStore = Ext.getStore('personalStore');
                 personalStoreAllData = personalStore.getData().getRange();
@@ -309,13 +325,24 @@ Ext.define('Thesis.controller.UsersController', {
                     value: phone[0],
                     bind: {
                         store: '{codeStore}'
+                    },
+                    listener: {
+                        change: function () {
+                            alert();
+                        }
                     }
                 }, {
                     xtype: 'textfield',
                     name: 'phone',
                     vtype: 'phone',
+                    validateOnChange: true,
                     value: phone[1] + ' ' + phone[2],
-                    plugins: new Ext.ux.plugin.FormatPhoneNumber()
+                    plugins: new Ext.ux.plugin.FormatPhoneNumber(),
+                    listeners: {
+                        change: function (newValue, oldValue, eOpts) {
+                            this.setValue(newValue.value);
+                        }
+                    }
                 }
                 ]
             });
@@ -336,13 +363,13 @@ Ext.define('Thesis.controller.UsersController', {
         var phonesArr = this.view.down('fieldset').items.items;
 
         for (var i = 1; i < phonesArr.length; i++) {
-            var phC = phonesArr[i].initialConfig.items[0].value;
-            var ph1 = phonesArr[i].initialConfig.items[1].value.substr(0, 5);
-            var ph2 = phonesArr[i].initialConfig.items[1].value.substr(5, 12);
-            userPhones += phC + ' ' + ph1 + ' ' + ph2 + '; ';
+            var phC = phonesArr[i].items.items[0].rawValue;
+            var ph1 = phonesArr[i].items.items[1].rawValue.substr(0, 5);
+            var ph2 = phonesArr[i].items.items[1].rawValue.substr(5, 12);
+            userPhones += phC + ' ' + ph1 + ph2 + '; ';
         }
-        userPhones = userPhones.slice(0, -2);
 
+        userPhones = userPhones.slice(0, -2);
 
         if (!(!name || !email || !userPhones || name.trim(' ').length === 0 || email.trim(' ').length === 0 || userPhones.trim(' ').length === 0)) {
             Ext.Ajax.request({

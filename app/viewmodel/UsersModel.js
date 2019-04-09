@@ -22,28 +22,7 @@ Ext.define('Thesis.viewmodel.UsersModel', {
                 {"code": "+373"}
             ]
         },
-        phonesStore: {},
-
-        treeStore: {
-            type: 'tree',
-            fields: [{
-                name: 'text',
-                mapping: 'name'
-            }],
-
-            root: {
-                leaf: false,
-                expanded: true,
-                text: '523'
-            },
-
-            proxy: {
-                type: 'memory',
-                autoLoad: true,
-                reader: {
-                    typeProperty: 'mtype'
-                }
-            }
+        phonesStore: {
         }
     }
 });

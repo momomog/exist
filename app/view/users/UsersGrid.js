@@ -35,6 +35,9 @@ Ext.define('Thesis.view.users.UsersGrid', {
             iconCls: 'x-fa fa-tree',
             text: 'Показать знания пользователя',
             margin: '0 5 0 0',
+            // bind:{
+            //     store: '{treeStore}'
+            // },
             handler: 'onCreateTreepanel'
         },{
             xtype: 'button',
