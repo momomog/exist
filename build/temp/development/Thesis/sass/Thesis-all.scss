@@ -1,5 +1,5 @@
 $app-name:  dynamic( 'Thesis' );
-$image-search-path: 'D:/users/SFokin/IdeaProjects/Thesis/build/development/Thesis/resources';
+$image-search-path: 'C:/Thesis/build/development/Thesis/resources';
 $theme-name:  dynamic( 'theme-crisp-touch' );
 $include-ext-abstractcomponent: dynamic(true);;
 $include-ext-abstractcontainer: dynamic(true);;
@@ -911,6 +911,7 @@ $include-thesis-controller-userscontroller: dynamic(true);;
 $include-thesis-model-personal: dynamic(true);;
 $include-thesis-model-skill: dynamic(true);;
 $include-thesis-model-technology: dynamic(true);;
+$include-thesis-model-tree: dynamic(true);;
 $include-thesis-model-used: dynamic(true);;
 $include-thesis-model-users: dynamic(true);;
 $include-thesis-store-personalstore: dynamic(true);;
@@ -939,6 +940,7 @@ $include-thesis-viewmodel-skillmodel: dynamic(true);;
 $include-thesis-viewmodel-technologymodel: dynamic(true);;
 $include-thesis-viewmodel-treepanelmodel: dynamic(true);;
 $include-thesis-viewmodel-usedmodel: dynamic(true);;
+$include-thesis-viewmodel-usersmodel: dynamic(true);;
 $output-paths: ("path": "../resources");
 
 /* ======================== ETC ======================== */
