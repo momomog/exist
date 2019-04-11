@@ -63,10 +63,10 @@ Ext.define('Thesis.view.main.Main', {
 
     listeners: {
         afterrender: function(){
-            this.onSkillsUpdate();
-            this.onTechnologiesUpdate();
-            this.onUsedsUpdate();
-            this.onPersonalsUpdate();
+            //this.onSkillsUpdate();
+            //this.onTechnologiesUpdate();
+            //this.onUsedsUpdate();
+            //this.onPersonalsUpdate();
         }
     }
 });

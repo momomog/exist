@@ -157,16 +157,18 @@ Ext.define('Thesis.controller.UsersController', {
 
     onUsersUpdate: function () {
         Ext.Ajax.request({
-            url: 'http://localhost:8080/first',
+            url: 'http://localhost:9999/spring/users/update',
             method: 'POST',
-            params: {
-                data: Ext.encode({
-                    "dataBase": "users",
-                    "operation": "usersUpdate"
-                })
-            },
+            // params: {
+            //     data: Ext.encode({
+            //         "dataBase": "users",
+            //         "operation": "usersUpdate"
+            //     })
+            // },
             success: function (response) {
+                console.log(response.responseText);
                 response = Ext.decode(response.responseText);
+
                 var store = Ext.getStore('usersStore');
                 store.removeAll();
                 out: if (response.success) {
@@ -214,7 +216,7 @@ Ext.define('Thesis.controller.UsersController', {
 
         if (!(!name || !email || !phone || name.trim(' ').length === 0 || email.trim(' ').length === 0)) {
             Ext.Ajax.request({
-                url: 'http://localhost:8080/first',
+                url: 'http://localhost:9999/spring/users/add',
                 method: 'POST',
                 params: {
                     data: Ext.encode({
@@ -256,7 +258,7 @@ Ext.define('Thesis.controller.UsersController', {
         var name = grid.getSelectionModel().lastSelected.data.name;
         var id = grid.getSelectionModel().lastSelected.id;
         Ext.Ajax.request({
-            url: 'http://localhost:8080/first',
+            url: 'http://localhost:9999/spring/users/delete',
             method: 'POST',
             params: {
                 data: Ext.encode({"dataBase": "users", "operation": "deleteUser", "id": id, "name": name})
@@ -353,7 +355,7 @@ Ext.define('Thesis.controller.UsersController', {
 
         if (!(!name || !email || !userPhones || name.trim(' ').length === 0 || email.trim(' ').length === 0 || userPhones.trim(' ').length === 0)) {
             Ext.Ajax.request({
-                url: 'http://localhost:8080/first',
+                url: 'http://localhost:9999/spring/users/updateData',
                 method: 'POST',
                 params: {
                     data: Ext.encode({
