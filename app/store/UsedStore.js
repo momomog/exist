@@ -9,7 +9,7 @@ Ext.define('Thesis.store.UsedStore', {
     proxy: {
         type: 'ajax',
         autoLoad: true,
-        url: 'http://localhost:8080/first',
+        url: 'http://localhost:9999/spring/lastused',
         reader: {
             type: 'json',
             rootProperty: 'useds'

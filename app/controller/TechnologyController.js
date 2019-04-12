@@ -13,7 +13,7 @@ Ext.define('Thesis.controller.TechnologyController', {
 
     onTechnologiesUpdate: function () {
         Ext.Ajax.request({
-            url: 'http://localhost:8080/first',
+            url: 'http://localhost:9999/spring/technologies/update',
             method: 'POST',
             params: {
                 data: Ext.encode({
@@ -55,14 +55,10 @@ Ext.define('Thesis.controller.TechnologyController', {
 
         if (!(!technology || technology.trim(' ') === '')) {
             Ext.Ajax.request({
-                url: 'http://localhost:8080/first',
+                url: 'http://localhost:9999/spring/technologies/add',
                 method: 'POST',
                 params: {
-                    data: Ext.encode({
-                        "dataBase": "technologies",
-                        "operation": "addTechnologyToDB",
-                        "name": technology
-                    })
+                    name: technology
                 },
                 scope: this,
                 success: function (response) {
@@ -70,6 +66,7 @@ Ext.define('Thesis.controller.TechnologyController', {
                     if (response.success) {
                         this.onTechnologiesUpdate();
                         this.view.hide();
+                        Ext.toast(response.message);
                     } else {
                         Ext.MessageBox.alert('Ошибка добавления', response.message);
                     }
@@ -90,20 +87,17 @@ Ext.define('Thesis.controller.TechnologyController', {
         var id = grid.getSelectionModel().lastSelected.id;
 
         Ext.Ajax.request({
-            url: 'http://localhost:8080/first',
+            url: 'http://localhost:9999/spring/technologies/delete',
             method: 'POST',
             params: {
-                data: Ext.encode({
-                    "dataBase": "technologies",
-                    "operation": "deleteTechnologyFromDB",
-                    "id": id
-                })
+                id: id
             },
             scope: this,
             success: function (response) {
                 response = Ext.decode(response.responseText);
                 if (response.success) {
                     this.onTechnologiesUpdate();
+                    Ext.toast(response.message);
                 } else {
                     Ext.MessageBox.alert('Ошибка при удалении', response.message);
                 }
@@ -120,21 +114,18 @@ Ext.define('Thesis.controller.TechnologyController', {
         var id = event.record.id;
 
         Ext.Ajax.request({
-            url: 'http://localhost:8080/first',
+            url: 'http://localhost:9999/spring/technologies/updateData',
             method: 'POST',
             params: {
-                data: Ext.encode({
-                    "dataBase": "technologies",
-                    "operation": "updateTechnology",
-                    "name": newName,
-                    "id": id
-                })
+                    name: newName,
+                    id: id
             },
             scope: this,
             success: function (response) {
                 response = Ext.decode(response.responseText);
                 if (response.success) {
                     this.onTechnologiesUpdate();
+                    Ext.toast(response.message);
                 } else {
                     Ext.MessageBox.alert('Ошибка при редактировании', response.message);
                 }

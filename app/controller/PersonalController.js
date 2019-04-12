@@ -13,7 +13,7 @@ Ext.define('Thesis.controller.PersonalController', {
 
     onPersonalsUpdate: function () {
         Ext.Ajax.request({
-            url: 'http://localhost:8080/first',
+            url: 'http://localhost:9999/spring/personals/update',
             method: 'POST',
             params: {
                 data: Ext.encode({
@@ -61,7 +61,7 @@ Ext.define('Thesis.controller.PersonalController', {
 
         if (!(!name || !tech || !skill || !used)) {
             Ext.Ajax.request({
-                url: 'http://localhost:8080/first',
+                url: 'http://localhost:9999/spring/personals/add',
                 method: 'POST',
                 params: {
                     data: Ext.encode({
@@ -99,7 +99,7 @@ Ext.define('Thesis.controller.PersonalController', {
         var id = grid.getSelectionModel().lastSelected.id;
 
         Ext.Ajax.request({
-            url: 'http://localhost:8080/first',
+            url: 'http://localhost:9999/spring/personals/delete',
             method: 'POST',
             params: {
                 data: Ext.encode({
@@ -156,7 +156,7 @@ Ext.define('Thesis.controller.PersonalController', {
             }
         }
         Ext.Ajax.request({
-            url: 'http://localhost:8080/first',
+            url: 'http://localhost:9999/spring/personals/updateData',
             method: 'POST',
             params: {
                 data: Ext.encode({

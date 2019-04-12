@@ -13,7 +13,7 @@ Ext.define('Thesis.controller.SkillController', {
 
     onSkillsUpdate: function () {
         Ext.Ajax.request({
-            url: 'http://localhost:8080/first',
+            url: 'http://localhost:9999/spring/skills/update',
             method: 'POST',
             params: {
                 data: Ext.encode({
@@ -22,6 +22,8 @@ Ext.define('Thesis.controller.SkillController', {
                 })
             },
             success: function (response) {
+                console.log(response);
+                console.log(response.responseText);
                 response = Ext.decode(response.responseText);
                 var store = Ext.getStore('skillStore');
                 store.removeAll();
@@ -54,20 +56,17 @@ Ext.define('Thesis.controller.SkillController', {
 
         if (!(!skill || skill.trim(' ') === '')) {
             Ext.Ajax.request({
-                url: 'http://localhost:8080/first',
+                url: 'http://localhost:9999/spring/skills/add',
                 method: 'POST',
                 params: {
-                    data: Ext.encode({
-                        "dataBase": "skills",
-                        "operation": "addSkillToDB",
-                        "name": skill
-                    })
+                        name: skill
                 },
                 scope: this,
                 success: function (response) {
                     response = Ext.decode(response.responseText);
                     if (response.success) {
                         this.onSkillsUpdate();
+                        Ext.toast(response.message);
                         this.view.hide();
                     } else {
                         Ext.MessageBox.alert('Ошибка добавления', response.message);
@@ -88,20 +87,17 @@ Ext.define('Thesis.controller.SkillController', {
         var id = grid.getSelectionModel().lastSelected.id;
 
         Ext.Ajax.request({
-            url: 'http://localhost:8080/first',
+            url: 'http://localhost:9999/spring/skills/delete',
             method: 'POST',
             params: {
-                data: Ext.encode({
-                    "dataBase": "skills",
-                    "operation": "deleteSkillFromDB",
-                    "id": id
-                })
+                    id: id
             },
             scope: this,
             success: function (response) {
                 response = Ext.decode(response.responseText);
                 if (response.success) {
                     this.onSkillsUpdate();
+                    Ext.toast(response.message);
                 } else {
                     Ext.MessageBox.alert('Ошибка при удалении', response.message);
                 }
@@ -117,21 +113,18 @@ Ext.define('Thesis.controller.SkillController', {
         var id = event.record.id;
 
         Ext.Ajax.request({
-            url: 'http://localhost:8080/first',
+            url: 'http://localhost:9999/spring/skills/updateData',
             method: 'POST',
             params: {
-                data: Ext.encode({
-                    "dataBase": "skills",
-                    "operation": "updateSkill",
-                    "name": newName,
-                    "id": id
-                })
+                    name: newName,
+                    id: id
             },
             scope: this,
             success: function (response) {
                 response = Ext.decode(response.responseText);
                 if (response.success) {
                     this.onSkillsUpdate();
+                    Ext.toast(response.message);
                 } else {
                     Ext.MessageBox.alert('Ошибка при редактировании', response.message);
                 }

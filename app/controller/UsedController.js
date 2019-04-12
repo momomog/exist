@@ -14,7 +14,7 @@ Ext.define('Thesis.controller.UsedController', {
 
     onUsedsUpdate: function () {
         Ext.Ajax.request({
-            url: 'http://localhost:8080/first',
+            url: 'http://localhost:9999/spring/lastused/update',
             method: 'POST',
             params: {
                 data: Ext.encode({
@@ -54,7 +54,7 @@ Ext.define('Thesis.controller.UsedController', {
 
         if (!(!used || used.trim(' ') === '')) {
             Ext.Ajax.request({
-                url: 'http://localhost:8080/first',
+                url: 'http://localhost:9999/spring/lastused/add',
                 method: 'POST',
                 params: {
                     data: Ext.encode({
@@ -88,7 +88,7 @@ Ext.define('Thesis.controller.UsedController', {
         var id = grid.getSelectionModel().lastSelected.id;
 
         Ext.Ajax.request({
-            url: 'http://localhost:8080/first',
+            url: 'http://localhost:9999/spring/lastused/delete',
             method: 'POST',
             params: {
                 data: Ext.encode({
@@ -117,7 +117,7 @@ Ext.define('Thesis.controller.UsedController', {
         var id = event.record.id;
 
         Ext.Ajax.request({
-            url: 'http://localhost:8080/first',
+            url: 'http://localhost:9999/spring/lastused/updateData',
             method: 'POST',
             params: {
                 data: Ext.encode({
