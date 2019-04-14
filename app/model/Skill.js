@@ -3,19 +3,5 @@ Ext.define('Thesis.model.Skill', {
 
     fields: [
         'id', 'name'
-    ],
-
-    autoLoad: true,
-    proxy: {
-        type: 'ajax',
-        reader: {
-            type: 'json',
-            successProperty: 'skills'
-        },
-        writer: {
-            type: 'json',
-            writeAllFields: true
-        }
-
-    }
+    ]
 });

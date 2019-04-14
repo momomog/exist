@@ -20,5 +20,4 @@ Ext.define('Thesis.view.users.UserTree', {
         iconCls: 'x-fa fa-times',
         handler: 'onCancelForm'
     }]
-
 });

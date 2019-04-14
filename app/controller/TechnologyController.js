@@ -14,13 +14,8 @@ Ext.define('Thesis.controller.TechnologyController', {
     onTechnologiesUpdate: function () {
         Ext.Ajax.request({
             url: 'http://localhost:9999/spring/technologies/update',
-            method: 'POST',
-            params: {
-                data: Ext.encode({
-                    "dataBase": "technologies",
-                    "operation": "technologiesUpdate"
-                })
-            },
+            async: false,
+            method: 'GET',
             success: function (response) {
                 response = Ext.decode(response.responseText);
                 var store = Ext.getStore('technologyStore');
@@ -50,7 +45,6 @@ Ext.define('Thesis.controller.TechnologyController', {
 
     onAddTechnology: function () {
         var vm = this.getViewModel();
-        var store = Ext.getStore('technologyStore');
         var technology = vm.get('name');
 
         if (!(!technology || technology.trim(' ') === '')) {
@@ -82,7 +76,6 @@ Ext.define('Thesis.controller.TechnologyController', {
     },
 
     onDeleteTechnology: function () {
-        var store = Ext.getStore('technologyStore');
         var grid = Ext.ComponentQuery.query('#technologyGrid')[0];
         var id = grid.getSelectionModel().lastSelected.id;
 
@@ -108,8 +101,7 @@ Ext.define('Thesis.controller.TechnologyController', {
         });
     },
 
-    onTechnologyEdit: function (roweditor, event, record) {
-
+    onTechnologyEdit: function (roweditor, event) {
         var newName = event.newValues.name;
         var id = event.record.id;
 

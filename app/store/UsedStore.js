@@ -13,10 +13,6 @@ Ext.define('Thesis.store.UsedStore', {
         reader: {
             type: 'json',
             rootProperty: 'useds'
-        },
-        writer: {
-            type: 'json',
-            writeAllFields: true
         }
     }
 });

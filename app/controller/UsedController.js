@@ -15,13 +15,8 @@ Ext.define('Thesis.controller.UsedController', {
     onUsedsUpdate: function () {
         Ext.Ajax.request({
             url: 'http://localhost:9999/spring/lastused/update',
-            method: 'POST',
-            params: {
-                data: Ext.encode({
-                    "dataBase": "useds",
-                    "operation": "usedsUpdate"
-                })
-            },
+            async: false,
+            method: 'GET',
             success: function (response) {
                 response = Ext.decode(response.responseText);
                 var store = Ext.getStore('usedStore');
@@ -49,19 +44,15 @@ Ext.define('Thesis.controller.UsedController', {
 
     onAddUsed: function () {
         var vm = this.getViewModel();
-        var store = Ext.getStore('usedStore');
         var used = vm.get('name');
 
         if (!(!used || used.trim(' ') === '')) {
             Ext.Ajax.request({
                 url: 'http://localhost:9999/spring/lastused/add',
+                async: false,
                 method: 'POST',
                 params: {
-                    data: Ext.encode({
-                        "dataBase": "useds",
-                        "operation": "addUsedToDB",
-                        "name": used
-                    })
+                        name: used
                 },
                 scope: this,
                 success: function (response) {
@@ -89,19 +80,17 @@ Ext.define('Thesis.controller.UsedController', {
 
         Ext.Ajax.request({
             url: 'http://localhost:9999/spring/lastused/delete',
+            async: false,
             method: 'POST',
             params: {
-                data: Ext.encode({
-                    "dataBase": "useds",
-                    "operation": "deleteUsedFromDB",
-                    "id": id
-                })
+                    id: id
             },
             scope: this,
             success: function (response) {
                 response = Ext.decode(response.responseText);
                 if (response.success) {
                     this.onUsedsUpdate();
+                    Ext.toast(response.message);
                 } else {
                     Ext.MessageBox.alert('Ошибка при удалении', response.message);
                 }
@@ -118,20 +107,18 @@ Ext.define('Thesis.controller.UsedController', {
 
         Ext.Ajax.request({
             url: 'http://localhost:9999/spring/lastused/updateData',
+            async: false,
             method: 'POST',
             params: {
-                data: Ext.encode({
-                    "dataBase": "useds",
-                    "operation": "updateUsed",
-                    "name": newName,
-                    "id": id
-                })
+                    name: newName,
+                    id: id
             },
             scope: this,
             success: function (response) {
                 response = Ext.decode(response.responseText);
                 if (response.success) {
                     this.onUsedsUpdate();
+                    Ext.toast(response.message);
                 } else {
                     Ext.MessageBox.alert('Ошибка при редактировании', response.message);
                 }

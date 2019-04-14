@@ -25,21 +25,20 @@ Ext.define('Thesis.view.users.UserForm', {
         },
         items: [{
             xtype: 'panel',
-            items: [
-                {
-                    xtype: 'textfield',
-                    fieldLabel: 'Имя',
-                    name: 'name',
-                    colspan: 2,
-                    bind: '{name}'
+            items: [{
+                xtype: 'textfield',
+                fieldLabel: 'Имя',
+                name: 'name',
+                colspan: 2,
+                bind: '{name}'
 
-                }, {
-                    xtype: 'textfield',
-                    fieldLabel: 'Эл. адрес',
-                    name: 'email',
-                    colspan: 2,
-                    bind: '{email}'
-                }]
+            }, {
+                xtype: 'textfield',
+                fieldLabel: 'Эл. адрес',
+                name: 'email',
+                colspan: 2,
+                bind: '{email}'
+            }]
         }, {
             xtype: 'panel',
             layout: 'hbox',
@@ -70,35 +69,33 @@ Ext.define('Thesis.view.users.UserForm', {
                 iconCls: 'x-fa fa-plus-square-o',
                 margin: '0 0 0 10',
                 handler: 'addPhoneToStore'
-            }
-            ]
+            }]
         }, {
             xtype: 'panel',
             layout: 'hbox',
             margin: '10 0 0 0',
-            items: [
-                {
-                    xtype: 'combobox',
-                    allowBlank: true,
-                    fieldLabel: 'Список номеров',
-                    displayField: 'number',
-                    valueField: 'number',
-                    queryMode: 'local',
-                    margin: '0 0 5 0',
-                    // labelWidth:'auto',
-                    width: 405,
-                    bind: {
-                        value: '{phonesStoreValue}',
-                        store: '{phonesStore}'
-                    }
-                }, {
-                    xtype: 'button',
-                    text: 'Удалить',
-                    margin: '5 0 0 10',
-                    width: 112,
-                    iconCls: 'x-fa fa-trash-o',
-                    handler: 'deletePhoneFromStore'
+            items: [{
+                xtype: 'combobox',
+                allowBlank: true,
+                fieldLabel: 'Список номеров',
+                displayField: 'number',
+                valueField: 'number',
+                queryMode: 'local',
+                margin: '0 0 5 0',
+                // labelWidth:'auto',
+                width: 405,
+                bind: {
+                    value: '{phonesStoreValue}',
+                    store: '{phonesStore}'
                 }
+            }, {
+                xtype: 'button',
+                text: 'Удалить',
+                margin: '5 0 0 10',
+                width: 112,
+                iconCls: 'x-fa fa-trash-o',
+                handler: 'deletePhoneFromStore'
+            }
             ]
         }
         ]

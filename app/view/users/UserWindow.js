@@ -1,5 +1,5 @@
 ///
-/// не используется!
+/// Нигде не используется!
 ///
 
 Ext.define('Thesis.view.users.UserWindow', {

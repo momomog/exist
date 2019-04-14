@@ -3,19 +3,5 @@ Ext.define('Thesis.model.Used', {
 
     fields: [
         'id', 'name'
-    ],
-
-    autoLoad: true,
-    proxy: {
-        type: 'ajax',
-        reader: {
-            type: 'json',
-            successProperty: 'useds'
-        },
-        writer: {
-            type: 'json',
-            writeAllFields: true
-        }
-
-    }
+    ]
 });

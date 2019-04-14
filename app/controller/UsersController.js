@@ -81,8 +81,6 @@ Ext.define('Thesis.controller.UsersController', {
                 grid.hide();
                 var myForm = Ext.create('Thesis.view.users.UserTree');
                 var userName = grid.getSelectionModel().lastSelected.data.name;
-                var tree = Ext.ComponentQuery.query('#userTree')[this.state.treePanelCount];
-                this.state.treePanelCount++;
 
                 userTreeStore = Ext.getStore('userTreeStore');
                 var rootNode = userTreeStore.getRootNode();
@@ -158,17 +156,10 @@ Ext.define('Thesis.controller.UsersController', {
     onUsersUpdate: function () {
         Ext.Ajax.request({
             url: 'http://localhost:9999/spring/users/update',
-            method: 'POST',
-            // params: {
-            //     data: Ext.encode({
-            //         "dataBase": "users",
-            //         "operation": "usersUpdate"
-            //     })
-            // },
+            async: false,
+            method: 'GET',
             success: function (response) {
-                console.log(response.responseText);
                 response = Ext.decode(response.responseText);
-
                 var store = Ext.getStore('usersStore');
                 store.removeAll();
                 out: if (response.success) {
@@ -196,7 +187,6 @@ Ext.define('Thesis.controller.UsersController', {
 
     onAddUser: function () {
         var vm = this.getViewModel();
-        var store = Ext.getStore('usersStore');
         var name = vm.get('name');
         var email = vm.get('email');
         var phone = vm.get('phone');
@@ -217,15 +207,12 @@ Ext.define('Thesis.controller.UsersController', {
         if (!(!name || !email || !phone || name.trim(' ').length === 0 || email.trim(' ').length === 0)) {
             Ext.Ajax.request({
                 url: 'http://localhost:9999/spring/users/add',
+                async: false,
                 method: 'POST',
                 params: {
-                    data: Ext.encode({
-                        "dataBase": "users",
-                        "operation": "addNewUser",
-                        "name": name,
-                        "email": email,
-                        "phone": allUserPhones
-                    })
+                    name: name,
+                    email: email,
+                    phone: allUserPhones
                 },
                 scope: this,
                 success: function (response) {
@@ -238,6 +225,7 @@ Ext.define('Thesis.controller.UsersController', {
                         this.view.close();
                         var grid = Ext.ComponentQuery.query('#usersGrid')[0];
                         grid.show();
+                        Ext.toast(response.message);
                     } else {
                         Ext.MessageBox.alert('Ошибка добавления', response.message);
                         vm.set('email', null);
@@ -253,15 +241,17 @@ Ext.define('Thesis.controller.UsersController', {
     },
 
     onDeleteUser: function () {
-        var store = Ext.getStore('usersStore');
         var grid = Ext.ComponentQuery.query('#usersGrid')[0];
         var name = grid.getSelectionModel().lastSelected.data.name;
         var id = grid.getSelectionModel().lastSelected.id;
+
         Ext.Ajax.request({
             url: 'http://localhost:9999/spring/users/delete',
+            async: false,
             method: 'POST',
             params: {
-                data: Ext.encode({"dataBase": "users", "operation": "deleteUser", "id": id, "name": name})
+                id: id,
+                name: name
             },
             scope: this,
             success: function (response) {
@@ -269,6 +259,7 @@ Ext.define('Thesis.controller.UsersController', {
                 if (response.success) {
                     this.onUsersUpdate();
                     this.onPersonalsUpdate();
+                    Ext.toast(response.message);
                 } else {
                     Ext.MessageBox.alert('Ошибка при удалении', response.message);
                 }
@@ -325,13 +316,11 @@ Ext.define('Thesis.controller.UsersController', {
                             this.setValue(newValue.value);
                         }
                     }
-                }
-                ]
+                }]
             });
         }
 
         this.state.editPanelCount++;
-
         editPanel.showAt(265, 0);
     },
 
@@ -356,16 +345,13 @@ Ext.define('Thesis.controller.UsersController', {
         if (!(!name || !email || !userPhones || name.trim(' ').length === 0 || email.trim(' ').length === 0 || userPhones.trim(' ').length === 0)) {
             Ext.Ajax.request({
                 url: 'http://localhost:9999/spring/users/updateData',
+                async: false,
                 method: 'POST',
                 params: {
-                    data: Ext.encode({
-                        "dataBase": "users",
-                        "operation": "updateUser",
-                        "name": name,
-                        "email": email,
-                        "phone": userPhones,
-                        "id": id
-                    })
+                    name: name,
+                    email: email,
+                    phone: userPhones,
+                    id: id
                 },
                 scope: this,
                 success: function (response) {
@@ -373,6 +359,7 @@ Ext.define('Thesis.controller.UsersController', {
                     if (response.success) {
                         this.view.hide();
                         this.onUsersUpdate();
+                        Ext.toast(response.message);
                     } else {
                         Ext.MessageBox.alert('Ошибка при сохранении', response.message);
                     }
@@ -390,6 +377,7 @@ Ext.define('Thesis.controller.UsersController', {
         Ext.getDoc().on('contextmenu', function (ev) {
             ev.preventDefault();
         });
+
         if (this.state.isOpenToolbar) {
             var toolBar = Ext.create('Ext.toolbar.Toolbar', {
                     width: 260,
@@ -420,8 +408,7 @@ Ext.define('Thesis.controller.UsersController', {
             this.state.isOpenToolbar = true;
             this.state.toolbarCount++;
         }
-    }
-    ,
+    },
 
     onUserOpClear: function () {
         var tool = Ext.ComponentQuery.query('#tool');

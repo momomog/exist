@@ -23,30 +23,6 @@ Ext.define('Thesis.viewmodel.UsersModel', {
                 {"code": "+373"}
             ]
         },
-        phonesStore: {},
-
-        // treeStore: {
-        //     type: 'tree',
-        //     autoLoad: true,
-        //
-        //     fields: [{
-        //         name: 'text',
-        //         mapping: 'name'
-        //     }],
-        //
-        //     root: {
-        //         leaf: true,
-        //         expanded: false,
-        //         text: 'blabla'
-        //     },
-        //
-        //     proxy: {
-        //         type: 'memory',
-        //         autoLoad: true,
-        //         reader: {
-        //             typeProperty: 'mtype'
-        //         }
-        //     }
-        // }
+        phonesStore: {}
     }
 });

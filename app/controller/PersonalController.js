@@ -14,13 +14,8 @@ Ext.define('Thesis.controller.PersonalController', {
     onPersonalsUpdate: function () {
         Ext.Ajax.request({
             url: 'http://localhost:9999/spring/personals/update',
-            method: 'POST',
-            params: {
-                data: Ext.encode({
-                    "dataBase": "personals",
-                    "operation": "personalsUpdate"
-                })
-            },
+            async: false,
+            method: 'GET',
             success: function (response) {
                 response = Ext.decode(response.responseText);
                 var store = Ext.getStore('personalStore');
@@ -52,7 +47,6 @@ Ext.define('Thesis.controller.PersonalController', {
 
     onAddPersonal: function () {
         var vm = this.getViewModel();
-        var store = Ext.getStore('personalStore');
         var name = this.lookupReference('nameCombo').getValue();
         var tech = this.lookupReference('technologyCombo').getValue();
         var skill = this.lookupReference('skillCombo').getValue();
@@ -62,17 +56,14 @@ Ext.define('Thesis.controller.PersonalController', {
         if (!(!name || !tech || !skill || !used)) {
             Ext.Ajax.request({
                 url: 'http://localhost:9999/spring/personals/add',
+                async: false,
                 method: 'POST',
                 params: {
-                    data: Ext.encode({
-                        "dataBase": "personals",
-                        "operation": "addPersonalToDB",
-                        "name": name,
-                        "technology": tech,
-                        "skill": skill,
-                        "used": used,
-                        "commentary": commentary
-                    })
+                    name: name,
+                    technology: tech,
+                    skill: skill,
+                    used: used,
+                    commentary: commentary
                 },
                 scope: this,
                 success: function (response) {
@@ -80,12 +71,13 @@ Ext.define('Thesis.controller.PersonalController', {
                     if (response.success) {
                         this.onPersonalsUpdate();
                         this.view.hide();
+                        Ext.toast(response.message);
                     } else {
                         Ext.MessageBox.alert('Ошибка добавления', response.message);
                     }
                 },
                 failure: function (err) {
-                    Ext.MessageBox.alert('Ошибка!!', err);
+                    Ext.MessageBox.alert('Ошибка!', err);
                 }
             });
             vm.set('commentary', null);
@@ -102,17 +94,14 @@ Ext.define('Thesis.controller.PersonalController', {
             url: 'http://localhost:9999/spring/personals/delete',
             method: 'POST',
             params: {
-                data: Ext.encode({
-                    "dataBase": "personals",
-                    "operation": "deletePersonal",
-                    "id": id
-                })
+                id: id
             },
             scope: this,
             success: function (response) {
                 response = Ext.decode(response.responseText);
                 if (response.success) {
                     this.onPersonalsUpdate();
+                    Ext.toast(response.message);
                 } else {
                     Ext.MessageBox.alert('Ошибка при удалении', response.message);
                 }
@@ -155,25 +144,24 @@ Ext.define('Thesis.controller.PersonalController', {
                 }
             }
         }
+
         Ext.Ajax.request({
             url: 'http://localhost:9999/spring/personals/updateData',
+            async: false,
             method: 'POST',
             params: {
-                data: Ext.encode({
-                    "dataBase": "personals",
-                    "operation": "updatePersonal",
-                    "id": id,
-                    "technology": newTechnology,
-                    "skill": newSkill,
-                    "used": newUsed,
-                    "commentary": newCommentary
-                })
+                id: id,
+                technology: newTechnology,
+                skill: newSkill,
+                used: newUsed,
+                commentary: newCommentary
             },
             scope: this,
             success: function (response) {
                 response = Ext.decode(response.responseText);
                 if (response.success) {
                     this.onPersonalsUpdate();
+                    Ext.toast(response.message);
                 } else {
                     Ext.MessageBox.alert('Ошибка при редактировании', response.message);
                 }

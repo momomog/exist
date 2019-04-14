@@ -3,13 +3,5 @@ Ext.define('Thesis.model.Users', {
 
     fields: [
         'id', 'name', 'email', 'phone'
-    ],
-
-    proxy: {
-        type: 'ajax',
-        reader: {
-            type: 'json',
-            successProperty: 'users'
-        }
-    }
+    ]
 });

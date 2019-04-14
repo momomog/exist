@@ -8,7 +8,7 @@ Ext.define('Thesis.store.UsersStore', {
     proxy: {
         type: 'ajax',
         autoLoad: true,
-        url: 'http://localhost:9999/spring/users',
+        url: 'http://localhost:9999/spring/users/update',
         reader: {
             type: 'json',
             rootProperty: 'users'

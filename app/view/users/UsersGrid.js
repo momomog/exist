@@ -56,7 +56,7 @@ Ext.define('Thesis.view.users.UsersGrid', {
     ],
 
     listeners: {
-        //afterrender: 'onUsersUpdate',
+        afterrender: 'onUsersUpdate',
         cellcontextmenu: 'onUserOp',
         cellmousedown: 'onUserOpClear',
         rowdblclick: 'onCreateEditPanel'

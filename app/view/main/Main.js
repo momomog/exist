@@ -5,7 +5,7 @@ Ext.define('Thesis.view.main.Main', {
         skill: 'Thesis.controller.SkillController',
         tech: 'Thesis.controller.TechnologyController',
         lastUsed: 'Thesis.controller.UsedController',
-        peronal: 'Thesis.controller.PersonalController'
+        personal: 'Thesis.controller.PersonalController'
     },
 
     requires: [
@@ -62,11 +62,11 @@ Ext.define('Thesis.view.main.Main', {
     }],
 
     listeners: {
-        afterrender: function(){
-            //this.onSkillsUpdate();
-            //this.onTechnologiesUpdate();
-            //this.onUsedsUpdate();
-            //this.onPersonalsUpdate();
+        afterrender: function () {
+            this.onSkillsUpdate();
+            this.onTechnologiesUpdate();
+            this.onUsedsUpdate();
+            this.onPersonalsUpdate();
         }
     }
 });

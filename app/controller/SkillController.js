@@ -14,16 +14,9 @@ Ext.define('Thesis.controller.SkillController', {
     onSkillsUpdate: function () {
         Ext.Ajax.request({
             url: 'http://localhost:9999/spring/skills/update',
-            method: 'POST',
-            params: {
-                data: Ext.encode({
-                    "dataBase": "skills",
-                    "operation": "skillsUpdate"
-                })
-            },
+            async: false,
+            method: 'GET',
             success: function (response) {
-                console.log(response);
-                console.log(response.responseText);
                 response = Ext.decode(response.responseText);
                 var store = Ext.getStore('skillStore');
                 store.removeAll();
@@ -51,15 +44,15 @@ Ext.define('Thesis.controller.SkillController', {
 
     onAddSkill: function () {
         var vm = this.getViewModel();
-        var store = Ext.getStore('skillStore');
         var skill = vm.get('name');
 
         if (!(!skill || skill.trim(' ') === '')) {
             Ext.Ajax.request({
                 url: 'http://localhost:9999/spring/skills/add',
+                async: false,
                 method: 'POST',
                 params: {
-                        name: skill
+                    name: skill
                 },
                 scope: this,
                 success: function (response) {
@@ -88,9 +81,10 @@ Ext.define('Thesis.controller.SkillController', {
 
         Ext.Ajax.request({
             url: 'http://localhost:9999/spring/skills/delete',
+            async: false,
             method: 'POST',
             params: {
-                    id: id
+                id: id
             },
             scope: this,
             success: function (response) {
@@ -114,10 +108,11 @@ Ext.define('Thesis.controller.SkillController', {
 
         Ext.Ajax.request({
             url: 'http://localhost:9999/spring/skills/updateData',
+            async: false,
             method: 'POST',
             params: {
-                    name: newName,
-                    id: id
+                name: newName,
+                id: id
             },
             scope: this,
             success: function (response) {

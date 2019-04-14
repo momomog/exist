@@ -12,10 +12,6 @@ Ext.define('Thesis.store.SkillStore', {
         reader: {
             type: 'json',
             rootProperty: 'skills'
-        },
-        writer: {
-            type: 'json',
-            writeAllFields: true
         }
     }
 });

@@ -12,9 +12,6 @@ Ext.define('Thesis.store.UserTreeStore', {
         expanded: true,
     },
 
-    autoLoad: true,
-    autoSync: true,
-
     proxy: {
         type: 'localstorage',
         autoLoad: true,

@@ -1,4 +1,3 @@
-
 Ext.define('Thesis.view.users.UserEditForm', {
     extend: 'Ext.form.Panel',
     title: 'Редактирование',
@@ -21,12 +20,6 @@ Ext.define('Thesis.view.users.UserEditForm', {
                     {"code": "+994"},
                     {"code": "+373"}
                 ]
-            }
-        },
-
-        formulas:{
-            getCurrentPhone: function(get){
-                return get('phoneCode') + get('phone');
             }
         }
     },
@@ -66,8 +59,7 @@ Ext.define('Thesis.view.users.UserEditForm', {
                     colspan: 2,
                     bind: '{email}'
                 }]
-        }
-        ]
+        }]
     }],
 
     buttons: [{

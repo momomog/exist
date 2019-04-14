@@ -27,7 +27,7 @@ Ext.define('Thesis.view.personal.PersonalGrid', {
             handler: 'onCreateWindow'
         }, {
             xtype: 'button',
-            text: 'Удалить сотрудника',
+            text: 'Удалить технологию',
             handler: 'onDeletePersonal'
         }, {
             xtype: 'button',
