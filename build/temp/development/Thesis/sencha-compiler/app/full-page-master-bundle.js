@@ -1,2 +1,2 @@
 // @tag full-page
-// @require C:\Thesis\app.js
+// @require D:\users\SFokin\IdeaProjects\Thesis\app.js

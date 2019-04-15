@@ -81,6 +81,8 @@ Ext.define('Thesis.controller.UsersController', {
                 grid.hide();
                 var myForm = Ext.create('Thesis.view.users.UserTree');
                 var userName = grid.getSelectionModel().lastSelected.data.name;
+                var tree = Ext.ComponentQuery.query('#userTree')[this.state.treePanelCount];
+                this.state.treePanelCount++;
 
                 userTreeStore = Ext.getStore('userTreeStore');
                 var rootNode = userTreeStore.getRootNode();
