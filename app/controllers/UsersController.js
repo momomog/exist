@@ -15,10 +15,10 @@ Ext.define('Thesis.controller.UsersController', {
         treePanelCount: 0
     },
 
-    onCreateTreepanel: function (btn) {
+    onCreateTreepanel: function (text) {
         var grid = Ext.ComponentQuery.query('#usersGrid')[0];
 
-        if (btn.text === 'Показать знания всех пользователей') {
+        if (text === 'Показать знания всех пользователей') {
             grid.hide();
             var allUsersTree = Ext.create('Thesis.view.users.UserTree');
             allUsersTree.title = 'Дерево пользователей';
@@ -382,11 +382,19 @@ Ext.define('Thesis.controller.UsersController', {
 
         if (this.state.isOpenToolbar) {
             var toolBar = Ext.create('Ext.toolbar.Toolbar', {
-                    width: 260,
+                    width: 460,
                     height: 46,
                     floating: true,
                     itemId: 'tool',
                     items: [{
+                        text: 'Знания пользователя',
+                        iconCls: 'x-fa fa-bars',
+                        scope: this,
+                        handler: function () {
+                            this.onCreateTreepanel(this.text);
+                            toolBar.hide();
+                        }
+                    }, {
                         text: 'Удалить пользователя',
                         iconCls: 'x-fa fa-trash-o',
                         scope: this,

@@ -30,18 +30,9 @@ Ext.define('Thesis.view.users.UsersGrid', {
             iconCls: 'x-fa fa-refresh',
             text: 'Обновить данные',
             handler: 'onUsersUpdate'
-        }, {
-            xtype: 'button',
-            iconCls: 'x-fa fa-tree',
-            text: 'Показать знания пользователя',
-            margin: '0 5 0 0',
-            // bind:{
-            //     store: '{treeStore}'
-            // },
-            handler: 'onCreateTreepanel'
         },{
             xtype: 'button',
-            iconCls: 'x-fa fa-tree',
+            iconCls: 'x-fa fa-bars',
             text: 'Показать знания всех пользователей',
             margin: '0 5 0 0',
             handler: 'onCreateTreepanel'

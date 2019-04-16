@@ -22,15 +22,18 @@ Ext.define('Thesis.view.personal.PersonalGrid', {
         xtype: 'toolbar',
         items: [{
             xtype: 'button',
+            iconCls: 'x-fa fa-user-plus',
             text: 'Добавить сотрудника',
             margin: '0 5 0 0',
             handler: 'onCreateWindow'
         }, {
             xtype: 'button',
+            iconCls: 'x-fa fa-trash-o',
             text: 'Удалить технологию',
             handler: 'onDeletePersonal'
         }, {
             xtype: 'button',
+            iconCls: 'x-fa fa-refresh',
             text: 'Обновить данные',
             handler: 'onPersonalsUpdate'
         }]

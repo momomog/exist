@@ -1,7 +1,7 @@
 Ext.application({
-    name: 'Thesis',
+    extend: 'Ext.app.Application',
 
-    extend: 'Thesis.Application',
+    name: 'Thesis',
 
     requires: [
         'Thesis.view.main.Main'

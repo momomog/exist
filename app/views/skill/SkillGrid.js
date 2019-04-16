@@ -1,41 +1,43 @@
-Ext.define('Thesis.view.technology.TechnologyGrid', {
+Ext.define('Thesis.view.skill.SkillGrid', {
     extend: 'Ext.grid.Panel',
-    xtype: 'technologygrid',
+    xtype: 'skillgrid',
 
-    controller: 'technology',
-    itemId: 'technologyGrid',
-
+    controller: 'skill',
+    itemId: 'skillGrid',
     requires: [
         'Ext.grid.plugin.CellEditing',
-        'Thesis.controller.TechnologyController'
+        'Thesis.controller.SkillController'
     ],
 
-    title: 'Технология',
+    title: 'Уровень навыков',
 
     store: {
-        type: 'technology'
+        type: 'skill'
     },
 
     dockedItems: [{
         xtype: 'toolbar',
         items: [{
             xtype: 'button',
+            iconCls: 'x-fa fa-user-plus',
             text: 'Добавить',
             margin: '0 5 0 0',
             handler: 'onCreateWindow'
         }, {
             xtype: 'button',
+            iconCls: 'x-fa fa-trash-o',
             text: 'Удалить',
-            handler: 'onDeleteTechnology'
+            handler: 'onDeleteSkill'
         }, {
             xtype: 'button',
+            iconCls: 'x-fa fa-refresh',
             text: 'Обновить данные',
-            handler: 'onTechnologiesUpdate'
+            handler: 'onSkillsUpdate'
         }]
     }],
 
     columns: [
-        {text: 'Наименование технологии', dataIndex: 'name', align: 'left', flex: 1, editor: 'textfield'}
+        {text: 'Уровень навыков', dataIndex: 'name', align: 'left', flex: 1, editor: 'textfield'}
     ],
 
     plugins: {
@@ -44,7 +46,7 @@ Ext.define('Thesis.view.technology.TechnologyGrid', {
     },
 
     listeners: {
-        afterrender: 'onTechnologiesUpdate',
-        edit: 'onTechnologyEdit'
+        afterrender: 'onSkillsUpdate',
+        edit: 'onSkillEdit'
     }
 });

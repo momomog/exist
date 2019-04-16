@@ -19,15 +19,18 @@ Ext.define('Thesis.view.used.UsedGrid', {
         xtype: 'toolbar',
         items: [{
             xtype: 'button',
+            iconCls: 'x-fa fa-user-plus',
             text: 'Добавить',
             margin: '0 5 0 0',
             handler: 'onCreateWindow'
         }, {
             xtype: 'button',
+            iconCls: 'x-fa fa-trash-o',
             text: 'Удалить',
             handler: 'onDeleteUsed'
         }, {
             xtype: 'button',
+            iconCls: 'x-fa fa-refresh',
             text: 'Обновить данные',
             handler: 'onUsedsUpdate'
         }]
