@@ -14,7 +14,7 @@ Ext.define('Thesis.view.main.Main', {
         'Thesis.view.users.UsersGrid'
     ],
 
-    controller: 'main',
+    controller: 'mainC',
     viewmodel: 'main',
 
     tabBarHeaderPosition: 0,
@@ -32,6 +32,22 @@ Ext.define('Thesis.view.main.Main', {
         title: 'Пользователь',
         iconCls: 'x-fa fa-user',
         items: [{
+            xtype: 'panel',
+            header: {
+                titleAlign: 'center',
+                items:[{
+                    xtype: 'button',
+                    text: 'Войти',
+                    margin: '0 12 0 0',
+                    handler: 'onShowAutorizationPanel',
+                }, {
+                    xtype: 'button',
+                    text: 'Зарегестрироваться'
+                }]
+            },
+            title: 'Вы вошли как неавторизованный пользователь.<br>' +
+                ' Для возможности редактирования таблиц авторизуйтесь или пройдите процедуру регистрации',
+        }, {
             xtype: 'usersgrid'
         }]
     }, {
@@ -58,7 +74,6 @@ Ext.define('Thesis.view.main.Main', {
         items: [{
             xtype: 'personalgrid'
         }]
-
     }],
 
     listeners: {
