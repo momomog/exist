@@ -71,4 +71,5 @@ Ext.define('Thesis.view.users.UserEditForm', {
         iconCls: 'x-fa fa-times',
         handler: 'onCancelForm'
     }]
+
 });

@@ -15,17 +15,66 @@ Ext.define('Thesis.controller.UsersController', {
         treePanelCount: 0
     },
 
-    onCreateTreepanel: function (text) {
+    onCreateTreepanel: function (btn, win) {
         var grid = Ext.ComponentQuery.query('#usersGrid')[0];
 
-        if (text === 'Показать знания всех пользователей') {
+        if (btn === undefined) {
+            if (grid.getSelectionModel().lastSelected === undefined) {
+                Ext.toast('Необходимо выбрать пользователя!');
+            } else {
+                grid.hide();
+                var myForm = Ext.create('Thesis.view.users.UserTree');
+                var userName = grid.getSelectionModel().lastSelected.data.name;
+                var tree = Ext.ComponentQuery.query('#userTree')[this.state.treePanelCount];
+                this.state.treePanelCount++;
+
+                userTreeStore = Ext.getStore('userTreeStore');
+                var rootNode = userTreeStore.getRootNode();
+                rootNode.data.text = userName;
+                rootNode.data.iconCls = 'x-fa fa-user';
+                console.log(rootNode);
+
+                personalStore = Ext.getStore('personalStore');
+                personalStoreAllData = personalStore.getData().getRange();
+
+                for (i = 0; i < personalStoreAllData.length; i++) {
+                    if (personalStoreAllData[i].data.Name === userName) {
+                        userTechnologyNode = rootNode.appendChild({
+                            text: personalStoreAllData[i].data.technology,
+                            iconCls: 'x-fa fa-leanpub',
+                            leaf: true,
+                            expanded: true
+                        });
+                        userSkillNode = userTechnologyNode.appendChild({
+                            text: personalStoreAllData[i].data.skill,
+                            iconCls: 'x-fa fa-level-up',
+                            leaf: true,
+                            expanded: true
+                        });
+                        userLastUsedNode = userSkillNode.appendChild({
+                            text: personalStoreAllData[i].data.used,
+                            iconCls: 'x-fa fa-terminal',
+                            leaf: true
+                        });
+                    }
+                }
+
+                myForm.showAt(265, 0, {
+                    easing: 'bounceOut',
+                    direction: 'up',
+                    duration: 1000
+                })
+            }
+        } else {
             grid.hide();
             var allUsersTree = Ext.create('Thesis.view.users.UserTree');
             allUsersTree.title = 'Дерево пользователей';
             var currentTree = Ext.ComponentQuery.query('#userTree')[this.state.treePanelCount];
             this.state.treePanelCount++;
-            var allUsersRootNode = currentTree.getRootNode();
-            allUsersRootNode.data.text = 'Пользователи';
+
+            rootNode = currentTree.getRootNode();
+            rootNode.data.text = 'Пользователи';
+            rootNode.data.iconCls = 'x-fa fa-users';
 
             var personalStore = Ext.getStore('personalStore');
             var personalStoreAllData = personalStore.getData().getRange();
@@ -38,6 +87,7 @@ Ext.define('Thesis.controller.UsersController', {
                     if (userTreeStore.getData().getRange()[j].data.text === personalStoreAllData[i].data.Name) {
                         userTechnologyNode = userTreeStore.getData().getRange()[j].appendChild({
                             text: personalStoreAllData[i].data.technology,
+                            iconCls: 'x-fa fa-leanpub',
                             leaf: true,
                             expanded: false
                         });
@@ -53,13 +103,15 @@ Ext.define('Thesis.controller.UsersController', {
                         continue here;
                     }
                 }
-                var userNameNode = allUsersRootNode.appendChild({
+                var userNameNode = rootNode.appendChild({
                     text: personalStoreAllData[i].data.Name,
+                    iconCls: 'x-fa fa-user',
                     leaf: true,
                     expanded: true
                 });
                 var userTechnologyNode = userNameNode.appendChild({
                     text: personalStoreAllData[i].data.technology,
+                    iconCls: 'x-fa fa-leanpub',
                     leaf: true,
                     expanded: false
                 });
@@ -73,44 +125,8 @@ Ext.define('Thesis.controller.UsersController', {
                     leaf: true
                 });
             }
+
             allUsersTree.showAt(265, 0);
-        } else {
-            if (grid.getSelectionModel().lastSelected === undefined) {
-                Ext.toast('Необходимо выбрать пользователя!');
-            } else {
-                grid.hide();
-                var myForm = Ext.create('Thesis.view.users.UserTree');
-                var userName = grid.getSelectionModel().lastSelected.data.name;
-                var tree = Ext.ComponentQuery.query('#userTree')[this.state.treePanelCount];
-                this.state.treePanelCount++;
-
-                userTreeStore = Ext.getStore('userTreeStore');
-                var rootNode = userTreeStore.getRootNode();
-                rootNode.data.text = userName;
-
-                personalStore = Ext.getStore('personalStore');
-                personalStoreAllData = personalStore.getData().getRange();
-
-                for (i = 0; i < personalStoreAllData.length; i++) {
-                    if (personalStoreAllData[i].data.Name === userName) {
-                        userTechnologyNode = rootNode.appendChild({
-                            text: personalStoreAllData[i].data.technology,
-                            leaf: true,
-                            expanded: true
-                        });
-                        userSkillNode = userTechnologyNode.appendChild({
-                            text: personalStoreAllData[i].data.skill,
-                            leaf: true,
-                            expanded: true
-                        });
-                        userLastUsedNode = userSkillNode.appendChild({
-                            text: personalStoreAllData[i].data.used,
-                            leaf: true
-                        });
-                    }
-                }
-                myForm.showAt(265, 0);
-            }
         }
     },
 
